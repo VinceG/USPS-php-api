@@ -2,7 +2,10 @@
 require_once('XMLParser.php');
 
 class USPSBase {
-	protected $username = '735FREEL4879';
+	const LIVE_API_URL = 'http://production.shippingapis.com/ShippingAPI.dll';
+	const TEST_API_URL = 'http://testing.shippingapis.com/ShippingAPITest.dll';
+	
+	protected $username = '';
 	protected $password = '';
 	/**
 	 *  the error code if one exists
@@ -30,6 +33,15 @@ class USPSBase {
 	
 	public static $testMode = false;
 	
+	protected $apiCodes = array(
+		'RateV2' => 'RateV2Request',
+		'RateV4' => 'RateV4Request',
+		'IntlRateV2' => 'IntlRateV2Request',
+		'Verify' => 'AddressValidateRequest',
+		'ZipCodeLookup' => 'ZipCodeLookupRequest',
+		'CityStateLookup' => 'CityStateLookupRequest',
+	);
+	
 	/**
 	 * Default options for curl.
      */
@@ -44,17 +56,20 @@ class USPSBase {
 		CURLOPT_RETURNTRANSFER => true,
 	  );
 	
+	public function __construct($username) {
+		$this->username = $username;
+	}
+	
 	protected function getXMLString() {
 		// Add in the defaults
 		$postFields = array(
 			'@attributes' => array('USERID' => $this->username),
-			'revision' => null,
 		);
 		
 		// Add in the sub class data
 		$postFields = array_merge($postFields, $this->getPostFields());
 		
-		$xml = XMLParser::createXML('RateV2Request', $postFields);
+		$xml = XMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
 		print_r($xml->saveXML());
 		return $xml->saveXML();
 	}
@@ -62,6 +77,10 @@ class USPSBase {
 	public function getPostData() {
 		$fields = array('API' => $this->apiVersion, 'XML' => $this->getXMLString());
 		return $fields;
+	}
+	
+	public function setApiVersion($version) {
+		$this->apiVersion = $version;
 	}
 	
 	public function setTestMode($value) {
@@ -78,7 +97,7 @@ class USPSBase {
    	* @param CurlHandler optional initialized curl handle
    	* @return String the response text
    	*/
-  	protected function doRequest($url, $ch=null) 
+  	protected function doRequest($ch=null) 
 	{
     	if (!$ch) {
       		$ch = curl_init();
@@ -86,9 +105,7 @@ class USPSBase {
 		
     	$opts = self::$CURL_OPTS;
     	$opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
-    	$opts[CURLOPT_URL] = $url;
-
-		print_r($opts);
+    	$opts[CURLOPT_URL] = self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL ;
 		
 		// set options
 		curl_setopt_array($ch, $opts);
@@ -107,8 +124,10 @@ class USPSBase {
 		// If it failed then set error code and message
 		if($this->isError()) {
 			$arrayResponse = $this->getArrayResponse();
-			$this->setErrorCode( $arrayResponse['Error']['Number'] );
-			$this->setErrorMessage( $arrayResponse['Error']['Description'] );
+			if(isset($arrayResponse['Error']['Number'])) {
+				$this->setErrorCode( $arrayResponse['Error']['Number'] );
+				$this->setErrorMessage( $arrayResponse['Error']['Description'] );
+			}
 		}
 
 		// close
@@ -127,6 +146,11 @@ class USPSBase {
 		
 		// Make sure the response does not have error in it
 		if(isset($response['Error'])) {
+			return true;
+		}
+		
+		// Check to see if we have the Error word in the response
+		if(strpos($this->getResponse(), '<Error>') !== false) {
 			return true;
 		}
 		

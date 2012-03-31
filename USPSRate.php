@@ -1,22 +1,12 @@
 <?php
 require_once('USPSBase.php');
 class USPSRate extends USPSBase {
-	const LIVE_DOMESTIC_API_URL = 'http://production.shippingapis.com/ShippingAPI.dll';
-	const LIVE_INTERNATIONAL_API_URL = '';
-	
-	const TEST_DOMESTIC_API_URL = 'http://testing.shippingapis.com/ShippingAPITest.dll';
-	
 	protected $apiVersion = 'RateV4';
 	
 	protected $packages = array();
 	
-	public function __construct() {
-		
-	}
-	
 	public function getRate() {
-		$this->apiVersion = 'RateV2';
-		$this->doRequest( parent::$testMode ? self::TEST_DOMESTIC_API_URL : self::LIVE_DOMESTIC_API_URL );
+		$this->doRequest();
 	}
 	
 	public function getPostFields() {
@@ -27,7 +17,7 @@ class USPSRate extends USPSBase {
 	* Add Package
 	*/
 	public function addPackage(USPSRatePackage $data, $id=null) {
-		$packageId = $id !== null ? $id : ('ID'.(count($this->packages)+1));
+		$packageId = $id !== null ? $id : ((count($this->packages)+1));
 		$this->packages['Package'][] = array_merge(array('@attributes' => array('ID' => $packageId)), $data->getPackageInfo());
 	}
 }
