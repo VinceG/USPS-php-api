@@ -3,7 +3,7 @@
 require_once('../USPSZipCodeLookup.php');
 
 // Initiate and set the username provided from usps
-$zipcode = new USPSZipCodeLookup('735FREEL4879');
+$zipcode = new USPSZipCodeLookup('xxxx');
 
 // During test mode this seems not to always work as expected
 //$verify->setTestMode(true);
@@ -13,9 +13,9 @@ $zipcode = new USPSZipCodeLookup('735FREEL4879');
 // to set them as the example below
 $address = new USPSAddress;
 $address->setFirmName('Apartment');
-$address->setApt('707');
-$address->setAddress('5440 Tujunga Ave');
-$address->setCity('North Hollywood');
+$address->setApt('100');
+$address->setAddress('9200 Milliken Ave');
+$address->setCity('Rancho Cucomonga');
 $address->setState('CA');
 
 // Add the address object to the zipcode lookup class

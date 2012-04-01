@@ -3,13 +3,13 @@
 require_once('../USPSCityStateLookup.php');
 
 // Initiate and set the username provided from usps
-$verify = new USPSCityStateLookup('735FREEL4879');
+$verify = new USPSCityStateLookup('xxxx');
 
 // During test mode this seems not to always work as expected
 //$verify->setTestMode(true);
 
 // Add the zip code we want to lookup the city and state
-$verify->addZipCode('91601');
+$verify->addZipCode('91730');
 
 // Perform the call and print out the results
 print_r($verify->lookup());

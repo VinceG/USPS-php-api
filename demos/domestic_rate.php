@@ -3,7 +3,7 @@
 require_once('../USPSRate.php');
 
 // Initiate and set the username provided from usps
-$rate = new USPSRate('735FREEL4879');
+$rate = new USPSRate('xxxx');
 
 // During test mode this seems not to always work as expected
 //$rate->setTestMode(true);

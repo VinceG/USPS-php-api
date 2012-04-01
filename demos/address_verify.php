@@ -3,7 +3,7 @@
 // Load the class
 require_once('../USPSAddressVerify.php');
 // Initiate and set the username provided from usps
-$verify = new USPSAddressVerify('735FREEL4879');
+$verify = new USPSAddressVerify('xxxx');
 
 // During test mode this seems not to always work as expected
 //$verify->setTestMode(true);
@@ -13,11 +13,11 @@ $verify = new USPSAddressVerify('735FREEL4879');
 // to set them as the example below
 $address = new USPSAddress;
 $address->setFirmName('Apartment');
-$address->setApt('707');
-$address->setAddress('51440 Tujunga Ave');
-$address->setCity('North Hollywood');
+$address->setApt('100');
+$address->setAddress('9200 Milliken Ave');
+$address->setCity('Rancho Cucomonga');
 $address->setState('CA');
-$address->setZip5(91601);
+$address->setZip5(91730);
 $address->setZip4('');
 
 // Add the address object to the address verify class
