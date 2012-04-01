@@ -1,12 +1,21 @@
 <?php
+/**
+ * Load required classes
+ */
 require_once('XMLParser.php');
-
+/**
+ * USPS Base class
+ * used to perform the actual api calls
+ * @since 1.0
+ * @author Vincent Gabriel
+ */
 class USPSBase {
 	const LIVE_API_URL = 'http://production.shippingapis.com/ShippingAPI.dll';
 	const TEST_API_URL = 'http://testing.shippingapis.com/ShippingAPITest.dll';
-	
+	/**
+	 * @var string - the usps username provided by the usps website
+	 */
 	protected $username = '';
-	protected $password = '';
 	/**
 	 *  the error code if one exists
 	 * @var integer
@@ -27,12 +36,28 @@ class USPSBase {
 	 * @var array
 	 */
 	protected $headers = '';
+	/**
+	 * The response represented as an array
+	 * @var array
+	 */
 	protected $arrayResponse = array();
+	/**
+	 * All the post fields we will add to the call
+	 * @var array
+	 */
 	protected $postFields = array();
+	/**
+	 * The api type we are about to call
+	 * @var string
+	 */
 	protected $apiVersion = '';
-	
+	/**
+	 * @var boolean - set whether we are in a test mode or not
+	 */
 	public static $testMode = false;
-	
+	/**
+	 * @var array - different kind of supported api calls by this wrapper
+	 */
 	protected $apiCodes = array(
 		'RateV2' => 'RateV2Request',
 		'RateV4' => 'RateV4Request',
@@ -41,7 +66,6 @@ class USPSBase {
 		'ZipCodeLookup' => 'ZipCodeLookupRequest',
 		'CityStateLookup' => 'CityStateLookupRequest',
 	);
-	
 	/**
 	 * Default options for curl.
      */
@@ -55,50 +79,53 @@ class USPSBase {
 	    CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_RETURNTRANSFER => true,
 	  );
-	
-	public function __construct($username) {
+	/**
+	 * Constructor
+	 * @param string $username - the usps api username
+	 */
+	public function __construct($username='') {
 		$this->username = $username;
 	}
-	
-	protected function getXMLString() {
-		// Add in the defaults
-		$postFields = array(
-			'@attributes' => array('USERID' => $this->username),
-		);
-		
-		// Add in the sub class data
-		$postFields = array_merge($postFields, $this->getPostFields());
-		
-		$xml = XMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
-		print_r($xml->saveXML());
-		return $xml->saveXML();
+	/**
+	 * set the usps api username we are going to user
+	 * @param string $username - the usps api username
+	 */
+	public function setUsername($username) {
+		$this->username = $username;
 	}
-	
+	/**
+	 * Return the post data fields as an array
+	 * @return array
+	 */
 	public function getPostData() {
 		$fields = array('API' => $this->apiVersion, 'XML' => $this->getXMLString());
 		return $fields;
 	}
-	
+	/**
+	 * Set the api version we are going to use
+	 * @param string $version the new api version
+	 * @return void
+	 */
 	public function setApiVersion($version) {
 		$this->apiVersion = $version;
 	}
-	
+	/**
+	 * Set whether we are in a test mode or not
+	 * @param boolean $value 
+	 * @return void
+	 */
 	public function setTestMode($value) {
 		self::$testMode = (bool) $value;
 	}
-	
 	/**
    	* Makes an HTTP request. This method can be overriden by subclasses if
    	* developers want to do fancier things or use something other than curl to
    	* make the request.
    	*
-   	* @param String the URL to make the request to
-   	* @param Array the parameters to use for the POST body
    	* @param CurlHandler optional initialized curl handle
    	* @return String the response text
    	*/
-  	protected function doRequest($ch=null) 
-	{
+  	protected function doRequest($ch=null) {
     	if (!$ch) {
       		$ch = curl_init();
     	}
@@ -124,9 +151,13 @@ class USPSBase {
 		// If it failed then set error code and message
 		if($this->isError()) {
 			$arrayResponse = $this->getArrayResponse();
-			if(isset($arrayResponse['Error']['Number'])) {
-				$this->setErrorCode( $arrayResponse['Error']['Number'] );
-				$this->setErrorMessage( $arrayResponse['Error']['Description'] );
+			
+			// Find the error number
+			$errorInfo = $this->getValueByKey($arrayResponse, 'Error');
+
+			if($errorInfo) {
+				$this->setErrorCode( $errorInfo['Number'] );
+				$this->setErrorMessage( $errorInfo['Description'] );
 			}
 		}
 
@@ -135,7 +166,26 @@ class USPSBase {
 		
 		return $this->getResponse();
     }
-	
+	/**
+	 * Return the xml string built that we are about to send over to the api
+	 * @return string
+	 */
+	protected function getXMLString() {
+		// Add in the defaults
+		$postFields = array(
+			'@attributes' => array('USERID' => $this->username),
+		);
+		
+		// Add in the sub class data
+		$postFields = array_merge($postFields, $this->getPostFields());
+		
+		$xml = XMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
+		return $xml->saveXML();
+	}
+	/**
+	 * Did we encounter an error?
+	 * @return boolean
+	 */
 	public function isError() {
 		$headers = $this->getHeaders();
 		$response = $this->getArrayResponse();
@@ -157,33 +207,46 @@ class USPSBase {
 		// No error
 		return false;
 	}
-	
+	/**
+	 * Was the last call successful 
+	 * @return boolean
+	 */
 	public function isSuccess() {
 		return !$this->isError() ? true : false;
 	}
-	
+	/**
+	 * Return the response represented as string
+	 * @return array
+	 */
 	public function convertResponseToArray() {
 		if($this->getResponse()) {
 			$this->setArrayResponse(XML2Array::createArray($this->getResponse()));
 		}
+		
+		return $this->getArrayResponse();
 	}
-	
+	/**
+	 * Set the array response value
+	 * @param array $value
+	 * @return void
+	 */
 	public function setArrayResponse($value) {
 		$this->arrayResponse = $value;
 	}
-	
+	/**
+	 * Return the array representation of the last response
+	 * @return array
+	 */
 	public function getArrayResponse() {
 		return $this->arrayResponse;
 	}
-	
 	/**
 	 * Set the response
 	 *
 	 * @param mixed the response returned from the call
 	 * @return facebookLib object
 	 */
-	public function setResponse( $response='' )
-	{
+	public function setResponse( $response='' ) {
 		$this->response = $response;
 		return $this;
 	}
@@ -192,8 +255,7 @@ class USPSBase {
 	 * 
 	 * @return mixed the response data
 	 */
-	public function getResponse()
-	{
+	public function getResponse() {
 		return $this->response;
 	}
 	/**
@@ -202,8 +264,7 @@ class USPSBase {
 	 * @param array the headers array
 	 * @return facebookLib object
 	 */
-	public function setHeaders( $headers='' )
-	{
+	public function setHeaders( $headers='' ) {
 		$this->headers = $headers;
 		return $this;
 	}
@@ -212,8 +273,7 @@ class USPSBase {
 	 * 
 	 * @return array the headers returned from the call
 	 */
-	public function getHeaders()
-	{
+	public function getHeaders() {
 		return $this->headers;
 	}
 	/**
@@ -222,8 +282,7 @@ class USPSBase {
 	 * @param integer the error code number
 	 * @return facebookLib object
 	 */
-	public function setErrorCode($code=0)
-	{
+	public function setErrorCode($code=0) {
 		$this->errorCode = $code;
 		return $this;
 	}
@@ -232,8 +291,7 @@ class USPSBase {
 	 * 
 	 * @return integer error code number
 	 */
-	public function getErrorCode()
-	{
+	public function getErrorCode() {
 		return $this->errorCode;
 	}
 	/**
@@ -242,8 +300,7 @@ class USPSBase {
 	 * @param string the error message
 	 * @return facebookLib object
 	 */
-	public function setErrorMessage($message='')
-	{
+	public function setErrorMessage($message='') {
 		$this->errorMessage = $message;
 		return $this;
 	}
@@ -252,8 +309,29 @@ class USPSBase {
 	 * 
 	 * @return string error code message
 	 */
-	public function getErrorMessage()
-	{
+	public function getErrorMessage() {
 		return $this->errorMessage;
+	}
+	/**
+	 * Find a key inside a multi dim. array
+	 * @param array $array
+	 * @param string $key
+	 * @return mixed
+	 */
+	protected function getValueByKey($array,$key) {
+		foreach($array as $k=>$each) {
+	  		if($k==$key) {
+	   			return $each;
+	  		}
+
+	  		if(is_array($each)) {
+	   			if($return = $this->getValueByKey($each,$key)) {
+	    			return $return;
+	   			}
+	  		}
+	 	}
+	
+		// Nothing matched
+		return null;
 	}
 }

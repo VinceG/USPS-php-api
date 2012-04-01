@@ -1,30 +1,67 @@
 <?php
+/**
+ * Load required classes
+ */
 require_once('USPSBase.php');
+/**
+ * USPS Rate calculator class
+ * used to get a rate for shipping methods
+ * @since 1.0
+ * @author Vincent Gabriel
+ */
 class USPSRate extends USPSBase {
+	/**
+	 * @var string - the api version used for this type of call
+	 */
 	protected $apiVersion = 'RateV4';
-	
+	/**
+	 * @var array - list of all addresses added so far
+	 */
 	protected $packages = array();
-	
+	/**
+	 * Perform the API call
+	 * @return string
+	 */
 	public function getRate() {
-		$this->doRequest();
+		return $this->doRequest();
 	}
-	
+	/**
+	 * returns array of all packages added so far
+	 * @return array
+	 */
 	public function getPostFields() {
 		return $this->packages;
 	}
+	/**
+	 * sets the type of call to perform domestic or international
+	 * @return array
+	 */
+	public function setInternationalCall($status) {
+		$this->apiVersion = $status === true ? 'IntlRateV2' : 'RateV4';
+	}
 	
 	/**
-	* Add Package
-	*/
+	 * Add Package to the stack
+	 * @param USPSRatePackage object $data
+	 * @param string $id the address unique id
+	 * @return void
+	 */
 	public function addPackage(USPSRatePackage $data, $id=null) {
 		$packageId = $id !== null ? $id : ((count($this->packages)+1));
 		$this->packages['Package'][] = array_merge(array('@attributes' => array('ID' => $packageId)), $data->getPackageInfo());
 	}
 }
-
+/**
+ * USPS Rate Package
+ * used by the ups rate class to create packages represented as objects
+ * @since 1.0
+ * @author Vincent Gabriel
+ */
 class USPSRatePackage extends USPSRate {
+	/**
+	 * @var array - list of all packages added so far
+	 */
 	protected $packageInfo = array();
-	
 	/** 
 	 * Services constants
 	 */
@@ -45,7 +82,6 @@ class USPSRatePackage extends USPSRate {
 	const SERVICE_LIBRARY = 'LIBRARY';
 	const SERVICE_ALL = 'ALL';
 	const SERVICE_ONLINE = 'ONLINE';
-	
 	/**
 	 * First class mail type
 	 * required when you use one of the first class services
@@ -55,7 +91,6 @@ class USPSRatePackage extends USPSRate {
 	const MAIL_TYPE_PARCEL = 'PARCEL'; 
 	const MAIL_TYPE_POSTCARD = 'POSTCARD'; 
 	const MAIL_TYPE_PACKAGE_SERVICE = 'PACKAGE SERVICE'; 
-	
 	/**
 	 * Container constants
 	 */
@@ -75,50 +110,89 @@ class USPSRatePackage extends USPSRate {
 	const CONTAINER_REGIONALRATEBOXC = 'REGIONALRATEBOXC';
 	const CONTAINER_RECTANGULAR = 'RECTANGULAR';
 	const CONTAINER_NONRECTANGULAR = 'NONRECTANGULAR';
-	
 	/**
 	 * Size constants
 	 */
 	const SIZE_LARGE = 'LARGE';
 	const SIZE_REGULAR = 'REGULAR';
-	
-	public function setService($service) {
-		return $this->setField('Service', $service);
+	/**
+	 * Set the service property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setService($value) {
+		return $this->setField('Service', $value);
 	}
-	
-	public function setFirstClassMailType($type) {
-		return $this->setField('FirstClassMailType', $type);
+	/**
+	 * Set the first class mail type property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setFirstClassMailType($value) {
+		return $this->setField('FirstClassMailType', $value);
 	}
-	
-	public function setZipOrigination($zip) {
-		return $this->setField('ZipOrigination', $zip);
+	/**
+	 * Set the zip origin property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setZipOrigination($value) {
+		return $this->setField('ZipOrigination', $value);
 	}
-	
-	public function setZipDestination($zip) {
-		return $this->setField('ZipDestination', $zip);
+	/**
+	 * Set the zip destination property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setZipDestination($value) {
+		return $this->setField('ZipDestination', $value);
 	}
-	
-	public function setPounds($pounds) {
-		return $this->setField('Pounds', $pounds);
+	/**
+	 * Set the pounds property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setPounds($value) {
+		return $this->setField('Pounds', $value);
 	}
-	
-	public function setOunces($ounces) {
-		return $this->setField('Ounces', $ounces);
+	/**
+	 * Set the ounces property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setOunces($value) {
+		return $this->setField('Ounces', $value);
 	}
-	
-	public function setContainer($container) {
-		return $this->setField('Container', $container);
+	/**
+	 * Set the container property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setContainer($value) {
+		return $this->setField('Container', $value);
 	}
-	
-	public function setSize($size) {
-		return $this->setField('Size', $size);
+	/**
+	 * Set the size property
+	 * @param string|int $value
+	 * @return object USPSRatePackage
+	 */
+	public function setSize($value) {
+		return $this->setField('Size', $value);
 	}
-	
+	/**
+	 * Add an element to the stack
+	 * @param string|int $key
+	 * @param string|int $value
+	 * @return object USPSAddress
+	 */
 	public function setField($key, $value) {
 		$this->packageInfo[ ucwords($key) ] = $value;
 		return $this;
 	}
-	
+	/**
+	 * Returns a list of all the info we gathered so far in the current package object
+	 * @return array
+	 */
 	public function getPackageInfo() {
 		return $this->packageInfo;
 	}

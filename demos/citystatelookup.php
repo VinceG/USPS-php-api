@@ -1,15 +1,22 @@
 <?php
-
+// Load the class
 require_once('../USPSCityStateLookup.php');
-$verify = new USPSCityStateLookup('735FREEL4879');
-$verify->setTestMode(true);
 
+// Initiate and set the username provided from usps
+$verify = new USPSCityStateLookup('735FREEL4879');
+
+// During test mode this seems not to always work as expected
+//$verify->setTestMode(true);
+
+// Add the zip code we want to lookup the city and state
 $verify->addZipCode('91601');
 
+// Perform the call and print out the results
 print_r($verify->lookup());
 print_r($verify->getArrayResponse());
-if($verify->isSuccess()) {
-	
+
+// Check if it was completed
+if($verify->isSuccess()) {	
 	echo 'Done';
 } else {
 	echo 'Error: ' . $verify->getErrorMessage();
