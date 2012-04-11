@@ -65,6 +65,7 @@ class USPSBase {
 		'Verify' => 'AddressValidateRequest',
 		'ZipCodeLookup' => 'ZipCodeLookupRequest',
 		'CityStateLookup' => 'CityStateLookupRequest',
+    'TrackV2' => 'TrackFieldRequest'
 	);
 	/**
 	 * Default options for curl.
