@@ -28,7 +28,7 @@ $rate->addPackage($package);
 
 // Perform the request and print out the result
 print_r($rate->getRate());
-print_r($verify->getArrayResponse());
+print_r($rate->getArrayResponse());
 
 // Was the call successful
 if($rate->isSuccess()) {
