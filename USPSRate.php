@@ -39,7 +39,17 @@ class USPSRate extends USPSBase {
 	public function setInternationalCall($status) {
 		$this->apiVersion = $status === true ? 'IntlRateV2' : 'RateV4';
 	}
-	
+
+	/**
+	 * Add other option for International & Insurance 
+	 * @param string|int $key
+	 * @param string|int $value
+ 	 */		
+	public function addExtraOption(USPSRatePackage $data, $key, $value) {
+		$this->packages[$key][] = $value; 
+	}
+
+
 	/**
 	 * Add Package to the stack
 	 * @param USPSRatePackage object $data
