@@ -1,10 +1,13 @@
 <?php
+
+namespace USPS;
 /**
  * USPS Address Class
  * used across other class to create addresses represented as objects
  * @since 1.0
  * @author Vincent Gabriel
  */
+
 class USPSAddress {
 	/**
 	 * @var array list of all key=>value pairs we added so far for the current address

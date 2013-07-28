@@ -1,8 +1,6 @@
 <?php
-/**
- * Load required classes
- */
-require_once('USPSBase.php');
+
+namespace USPS;
 /**
  * USPS Rate calculator class
  * used to get a rate for shipping methods
