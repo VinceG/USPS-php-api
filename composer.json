@@ -1,5 +1,5 @@
 {
-	"name": "VinceG/USPS-php-api",
+	"name": "vinceg/usps-php-api",
 	"description": "PHP wrapper for USPS Web Tools API",
 	"keywords": ["usps", "api"],
 	"require": {
