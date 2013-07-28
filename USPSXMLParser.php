@@ -31,7 +31,7 @@ namespace USPS;
  *       echo $xml->saveXML();
  */
 
-class XMLParser {
+class USPSXMLParser {
 
     private static $xml = null;
 	private static $encoding = 'UTF-8';

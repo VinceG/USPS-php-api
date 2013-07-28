@@ -178,7 +178,7 @@ class USPSBase {
 		// Add in the sub class data
 		$postFields = array_merge($postFields, $this->getPostFields());
 		
-		$xml = XMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
+		$xml = USPSXMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
 		return $xml->saveXML();
 	}
 	/**
