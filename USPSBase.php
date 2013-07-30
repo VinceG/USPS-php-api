@@ -133,9 +133,6 @@ class USPSBase {
     	$opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
     	$opts[CURLOPT_URL] = self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL ;
     	
-    	var_dump($opts);
-    	die(0);
-		
 		// set options
 		curl_setopt_array($ch, $opts);
 
@@ -182,7 +179,7 @@ class USPSBase {
 		$postFields = array_merge($postFields, $this->getPostFields());
 		
 		$xml = USPSXMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
-		return $xml->saveXML($this->apiCodes[$this->apiVersion]);
+		return $xml->saveXML();
 	}
 	/**
 	 * Did we encounter an error?
