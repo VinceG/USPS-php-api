@@ -132,6 +132,9 @@ class USPSBase {
     	$opts = self::$CURL_OPTS;
     	$opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
     	$opts[CURLOPT_URL] = self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL ;
+    	
+    	var_dump($opts);
+    	die(0);
 		
 		// set options
 		curl_setopt_array($ch, $opts);
