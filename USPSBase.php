@@ -63,7 +63,7 @@ class USPSBase {
 		'Verify' => 'AddressValidateRequest',
 		'ZipCodeLookup' => 'ZipCodeLookupRequest',
 		'CityStateLookup' => 'CityStateLookupRequest',
-    'TrackV2' => 'TrackFieldRequest'
+    'TrackV2' => 'TrackRequest'
 	);
 	/**
 	 * Default options for curl.
@@ -182,7 +182,7 @@ class USPSBase {
 		$postFields = array_merge($postFields, $this->getPostFields());
 		
 		$xml = USPSXMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
-		return $xml->saveXML();
+		return $xml->saveXML($this->apiCodes[$this->apiVersion]);
 	}
 	/**
 	 * Did we encounter an error?
