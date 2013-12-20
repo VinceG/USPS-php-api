@@ -23,7 +23,7 @@ class USPSBase {
 	protected $errorCode = 0;
 	/**
 	 * the error message if one exists
-	 * @var string 
+	 * @var string
 	 */
 	protected $errorMessage = '';
 	/**
@@ -65,7 +65,9 @@ class USPSBase {
 		'Verify' => 'AddressValidateRequest',
 		'ZipCodeLookup' => 'ZipCodeLookupRequest',
 		'CityStateLookup' => 'CityStateLookupRequest',
-    'TrackV2' => 'TrackFieldRequest'
+    'TrackV2' => 'TrackFieldRequest',
+    'FirstClassMail' => 'FirstClassMailRequest',
+    'SDCGetLocations' => 'SDCGetLocationsRequest'
 	);
 	/**
 	 * Default options for curl.
@@ -112,7 +114,7 @@ class USPSBase {
 	}
 	/**
 	 * Set whether we are in a test mode or not
-	 * @param boolean $value 
+	 * @param boolean $value
 	 * @return void
 	 */
 	public function setTestMode($value) {
@@ -130,11 +132,11 @@ class USPSBase {
     	if (!$ch) {
       		$ch = curl_init();
     	}
-		
+
     	$opts = self::$CURL_OPTS;
     	$opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
     	$opts[CURLOPT_URL] = self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL ;
-		
+
 		// set options
 		curl_setopt_array($ch, $opts);
 
@@ -148,11 +150,11 @@ class USPSBase {
 
 		// Convert response to array
 		$this->convertResponseToArray();
-		
+
 		// If it failed then set error code and message
 		if($this->isError()) {
 			$arrayResponse = $this->getArrayResponse();
-			
+
 			// Find the error number
 			$errorInfo = $this->getValueByKey($arrayResponse, 'Error');
 
@@ -164,7 +166,7 @@ class USPSBase {
 
 		// close
 		curl_close($ch);
-		
+
 		return $this->getResponse();
     }
 	/**
@@ -176,10 +178,10 @@ class USPSBase {
 		$postFields = array(
 			'@attributes' => array('USERID' => $this->username),
 		);
-		
+
 		// Add in the sub class data
 		$postFields = array_merge($postFields, $this->getPostFields());
-		
+
 		$xml = XMLParser::createXML($this->apiCodes[$this->apiVersion], $postFields);
 		return $xml->saveXML();
 	}
@@ -194,22 +196,22 @@ class USPSBase {
 		if($headers['http_code'] != 200) {
 			return true;
 		}
-		
+
 		// Make sure the response does not have error in it
 		if(isset($response['Error'])) {
 			return true;
 		}
-		
+
 		// Check to see if we have the Error word in the response
 		if(strpos($this->getResponse(), '<Error>') !== false) {
 			return true;
 		}
-		
+
 		// No error
 		return false;
 	}
 	/**
-	 * Was the last call successful 
+	 * Was the last call successful
 	 * @return boolean
 	 */
 	public function isSuccess() {
@@ -223,7 +225,7 @@ class USPSBase {
 		if($this->getResponse()) {
 			$this->setArrayResponse(XML2Array::createArray($this->getResponse()));
 		}
-		
+
 		return $this->getArrayResponse();
 	}
 	/**
@@ -253,7 +255,7 @@ class USPSBase {
 	}
 	/**
 	 * Get the response data
-	 * 
+	 *
 	 * @return mixed the response data
 	 */
 	public function getResponse() {
@@ -271,7 +273,7 @@ class USPSBase {
 	}
 	/**
 	 * Get the headers
-	 * 
+	 *
 	 * @return array the headers returned from the call
 	 */
 	public function getHeaders() {
@@ -289,7 +291,7 @@ class USPSBase {
 	}
 	/**
 	 * Get the error code number
-	 * 
+	 *
 	 * @return integer error code number
 	 */
 	public function getErrorCode() {
@@ -307,7 +309,7 @@ class USPSBase {
 	}
 	/**
 	 * Get the error code message
-	 * 
+	 *
 	 * @return string error code message
 	 */
 	public function getErrorMessage() {
@@ -331,7 +333,7 @@ class USPSBase {
 	   			}
 	  		}
 	 	}
-	
+
 		// Nothing matched
 		return null;
 	}

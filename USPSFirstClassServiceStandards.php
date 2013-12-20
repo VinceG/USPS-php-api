@@ -36,10 +36,12 @@ class USPSFirstClassServiceStandards extends USPSBase {
    * @param $destination_zip
    */
   public function addRoute($origin_zip, $destination_zip) {
-    $zipCodes = array(
+    $this->route = array(
       'OriginZip' => $origin_zip,
       'DestinationZip' => $destination_zip,
     );
-    $this->route = $zipCodes;
   }
 }
+
+
+

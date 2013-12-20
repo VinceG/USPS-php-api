@@ -2,16 +2,16 @@
 // Load the class
 require_once('../USPSFirstClassServiceStandards.php');
 
-// Initiate and set the username provided from usps
+// Initiate and set the username provided from usps.
 $delivery = new USPSFirstClassServiceStandards('xxxx');
 
-// During test mode this seems not to always work as expected
+// During test mode this seems not to always work as expected.
 $delivery->setTestMode(true);
 
-// Add the zip code we want to lookup the city and state
+// Add the zip codes we want to know a shipping time between.
 $delivery->addRoute('91730', '90025');
 
-// Perform the call and print out the results
+// Perform the call and print out the results.
 var_dump($delivery->getServiceStandard());
 var_dump($delivery->getArrayResponse());
 
@@ -19,5 +19,5 @@ var_dump($delivery->getArrayResponse());
 if($delivery->isSuccess()) {
   echo 'Done';
 } else {
-  echo 'Error: ' . $verify->getErrorMessage();
+  echo 'Error: ' . $delivery->getErrorMessage();
 }
