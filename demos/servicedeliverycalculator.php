@@ -13,9 +13,8 @@ $delivery->addRoute(3, '91730', '90025');
 
 // Perform the call and print out the results
 var_dump($delivery->getServiceDeliveryCalculation());
-$foo = $delivery->getArrayResponse();
-var_dump($foo);
-var_dump($foo['SDCGetLocationsResponse']['NonEM'][0]['SchedDlvryDate']);
+var_dump($delivery->getArrayResponse());
+
 
 // Check if it was completed
 if($delivery->isSuccess()) {
