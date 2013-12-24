@@ -16,8 +16,8 @@ print_r($verify->lookup());
 print_r($verify->getArrayResponse());
 
 // Check if it was completed
-if($verify->isSuccess()) {	
-	echo 'Done';
+if($verify->isSuccess()) {
+  echo 'Done';
 } else {
-	echo 'Error: ' . $verify->getErrorMessage();
+  echo 'Error: ' . $verify->getErrorMessage();
 }

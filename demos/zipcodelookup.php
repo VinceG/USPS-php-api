@@ -27,7 +27,7 @@ print_r($zipcode->getArrayResponse());
 
 // Check if it was completed
 if($zipcode->isSuccess()) {
-	echo 'Done';
+  echo 'Done';
 } else {
-	echo 'Error: ' . $zipcode->getErrorMessage();
+  echo 'Error: ' . $zipcode->getErrorMessage();
 }

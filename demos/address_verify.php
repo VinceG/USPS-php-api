@@ -31,7 +31,7 @@ var_dump($verify->isError());
 
 // See if it was successful
 if($verify->isSuccess()) {
-	echo 'Done';
+  echo 'Done';
 } else {
-	echo 'Error: ' . $verify->getErrorMessage();
+  echo 'Error: ' . $verify->getErrorMessage();
 }

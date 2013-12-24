@@ -32,7 +32,7 @@ print_r($rate->getArrayResponse());
 
 // Was the call successful
 if($rate->isSuccess()) {
-	echo 'Done';
+  echo 'Done';
 } else {
-	echo 'Error: ' . $rate->getErrorMessage();
+  echo 'Error: ' . $rate->getErrorMessage();
 }

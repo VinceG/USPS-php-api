@@ -11,7 +11,7 @@ This wrapper allows you to perform some basic calls to the USPS api. Some of the
 Requirements
 ============
 
-- Apache 2 Web Server 
+- Apache 2 Web Server
 - PHP 5.x configured with the following extensions:
   - CUrl
 - USPS API Username
