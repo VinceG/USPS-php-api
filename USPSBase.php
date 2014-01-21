@@ -11,7 +11,7 @@ require_once('XMLParser.php');
  */
 class USPSBase {
   const LIVE_API_URL = 'http://production.shippingapis.com/ShippingAPI.dll';
-  const TEST_API_URL = 'http://testing.shippingapis.com/ShippingAPITest.dll';
+  const TEST_API_URL = 'http://production.shippingapis.com/ShippingAPITest.dll';
   /**
    * @var string - the usps username provided by the usps website
    */
