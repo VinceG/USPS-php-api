@@ -7,6 +7,10 @@ This wrapper allows you to perform some basic calls to the USPS api. Some of the
 - Zip code lookup by address
 - City/State lookup by zip code
 - Verify address
+- Print Shipping Labels
+- Service Delivery Calculator
+- Confirm Tracking
+
 
 Requirements
 ============
