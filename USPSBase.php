@@ -10,8 +10,9 @@ require_once('XMLParser.php');
  * @author Vincent Gabriel
  */
 class USPSBase {
-  const LIVE_API_URL = 'http://production.shippingapis.com/ShippingAPI.dll';
-  const TEST_API_URL = 'http://testing.shippingapis.com/ShippingAPITest.dll';
+  const LIVE_API_URL = 'https://secure.shippingapis.com/ShippingAPI.dll';
+  const TEST_API_URL = 'https://secure.shippingapis.com/ShippingAPITest.dll';
+  
   /**
    * @var string - the usps username provided by the usps website
    */
@@ -67,7 +68,8 @@ class USPSBase {
     'CityStateLookup' => 'CityStateLookupRequest',
     'TrackV2' => 'TrackFieldRequest',
     'FirstClassMail' => 'FirstClassMailRequest',
-    'SDCGetLocations' => 'SDCGetLocationsRequest'
+    'SDCGetLocations' => 'SDCGetLocationsRequest',
+    'ExpressMailLabel' => 'ExpressMailLabelRequest',
   );
   /**
    * Default options for curl.
@@ -77,7 +79,7 @@ class USPSBase {
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT        => 60,
     CURLOPT_FRESH_CONNECT  => 1,
-    CURLOPT_PORT       => 80,
+    CURLOPT_PORT       => 443,
     CURLOPT_USERAGENT      => 'usps-php',
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_RETURNTRANSFER => true,
