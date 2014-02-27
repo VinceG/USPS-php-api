@@ -3,7 +3,7 @@
 // Load the class
 require_once('../USPSPriorityLabel.php');
 // Initiate and set the username provided from usps
-$label = new USPSPriorityLabel('457LANDM2215');
+$label = new USPSPriorityLabel('xxxx');
 
 // During test mode this seems not to always work as expected
 $label->setTestMode(true);
