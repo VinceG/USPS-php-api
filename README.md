@@ -7,7 +7,9 @@ This wrapper allows you to perform some basic calls to the USPS api. Some of the
 - Zip code lookup by address
 - City/State lookup by zip code
 - Verify address
-- Print Shipping Labels
+- Create Priority Shipping Labels
+- Create Open & Distribute Shipping Labels
+- Create International Shipping Labels (Express, Priority, First Class)
 - Service Delivery Calculator
 - Confirm Tracking
 
@@ -29,9 +31,6 @@ Please check the 'demos' directory for usage examples on the various types of ap
 Authors
 =======
 Vincent Gabriel <http://vadimg.com>
-
-Thanks
-======
 
 License
 =======

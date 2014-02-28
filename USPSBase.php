@@ -70,6 +70,11 @@ class USPSBase {
     'FirstClassMail' => 'FirstClassMailRequest',
     'SDCGetLocations' => 'SDCGetLocationsRequest',
     'ExpressMailLabel' => 'ExpressMailLabelRequest',
+    'OpenDistributePriorityV2' => 'OpenDistributePriorityV2.0Request',
+    'OpenDistributePriorityV2Certify' => 'OpenDistributePriorityV2.0CertifyRequest',
+    'ExpressMailIntl' => 'ExpressMailIntlRequest',
+    'PriorityMailIntl' => 'PriorityMailIntlRequest',
+    'FirstClassMailIntl' => 'FirstClassMailIntlRequest',
   );
   /**
    * Default options for curl.
@@ -121,6 +126,13 @@ class USPSBase {
    */
   public function setTestMode($value) {
     self::$testMode = (bool) $value;
+  }
+  /**
+   * Response api name
+   * @return string
+   */
+  public function getResponseApiName() {
+    return str_replace('Request', 'Response', $this->apiCodes[$this->apiVersion]);
   }
   /**
    * Makes an HTTP request. This method can be overriden by subclasses if

@@ -9,9 +9,9 @@ $label = new USPSPriorityLabel('xxxx');
 $label->setTestMode(true);
 
 $label->setFromAddress('Erik', 'Richard', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204', '', '8882721214');
-$label->setToAddress('Vincent', 'Gabriel', '', '5440 Tujunga Ave', 'North Hollywood', 'CA', '91601', '707');
-$label->setWeight(1);
-
+$label->setToAddress('Vincent', 'Gabriel', '', '230 Murray St', 'New York', 'NY', '10282');
+$label->setWeightOunces(1);
+//$label->setField('32', 'SeparateReceiptPage', 'true');
 // Perform the request and return result
 $label->createLabel();
 
@@ -25,6 +25,7 @@ if($label->isSuccess()) {
   //echo "\n Confirmation:" . $label->getConfirmationNumber();
 
   $label = $label->getLabelContents();
+  
   if($label) {
   	$contents = base64_decode($label);
   	header('Content-type: application/pdf');
