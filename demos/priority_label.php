@@ -3,7 +3,7 @@
 // Load the class
 require_once('../USPSPriorityLabel.php');
 // Initiate and set the username provided from usps
-$label = new USPSPriorityLabel('xxxx');
+$label = new USPSPriorityLabel('928CAPTU2771');
 
 // During test mode this seems not to always work as expected
 $label->setTestMode(true);
@@ -11,13 +11,17 @@ $label->setTestMode(true);
 $label->setFromAddress('Erik', 'Richard', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204', '', '8882721214');
 $label->setToAddress('Vincent', 'Gabriel', '', '230 Murray St', 'New York', 'NY', '10282');
 $label->setWeightOunces(1);
-//$label->setField('32', 'SeparateReceiptPage', 'true');
+$label->setField(36, 'LabelDate', '03/12/2014');
+
+//$label->setField(32, 'SeparateReceiptPage', 'true');
+
 // Perform the request and return result
 $label->createLabel();
 
 //print_r($label->getArrayResponse());
 //print_r($label->getPostData());
 //var_dump($label->isError());
+
 
 // See if it was successful
 if($label->isSuccess()) {
@@ -39,3 +43,4 @@ if($label->isSuccess()) {
 } else {
   echo 'Error: ' . $label->getErrorMessage();
 }
+exit;

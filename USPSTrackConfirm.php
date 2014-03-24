@@ -15,6 +15,10 @@ class USPSTrackConfirm extends USPSBase {
    * @var array - list of all packages added so far
    */
   protected $packages = array();
+  
+  public function getEndpoint() {
+    return self::$testMode ? 'http://production.shippingapis.com/ShippingAPITest.dll': 'http://production.shippingapis.com/ShippingAPI.dll';
+  }
   /**
    * Perform the API call
    * @return string

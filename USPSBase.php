@@ -12,7 +12,7 @@ require_once('XMLParser.php');
 class USPSBase {
   const LIVE_API_URL = 'https://secure.shippingapis.com/ShippingAPI.dll';
   const TEST_API_URL = 'https://secure.shippingapis.com/ShippingAPITest.dll';
-  
+
   /**
    * @var string - the usps username provided by the usps website
    */
@@ -70,6 +70,7 @@ class USPSBase {
     'FirstClassMail' => 'FirstClassMailRequest',
     'SDCGetLocations' => 'SDCGetLocationsRequest',
     'ExpressMailLabel' => 'ExpressMailLabelRequest',
+    'PriorityMail' => 'PriorityMailRequest',
     'OpenDistributePriorityV2' => 'OpenDistributePriorityV2.0Request',
     'OpenDistributePriorityV2Certify' => 'OpenDistributePriorityV2.0CertifyRequest',
     'ExpressMailIntl' => 'ExpressMailIntlRequest',
@@ -149,7 +150,7 @@ class USPSBase {
 
     $opts = self::$CURL_OPTS;
     $opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
-    $opts[CURLOPT_URL] = self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL ;
+    $opts[CURLOPT_URL] = $this->getEndpoint();
 
     // set options
     curl_setopt_array($ch, $opts);
@@ -183,6 +184,11 @@ class USPSBase {
 
     return $this->getResponse();
   }
+
+  public function getEndpoint() {
+    return self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL;
+  }
+
   /**
    * Return the xml string built that we are about to send over to the api
    * @return string

@@ -3,10 +3,8 @@
 // Load the class
 require_once('../USPSOpenDistributeLabel.php');
 // Initiate and set the username provided from usps
-$label = new USPSOpenDistributeLabel('xxxx');
+$label = new USPSOpenDistributeLabel('928CAPTU2771');
 
-// During test mode this seems not to always work as expected
-$label->setTestMode(true);
 
 $label->setFromAddress('Erik', 'Richard', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204');
 $label->setToAddress('Landmark Network', '5440 Tujunga Ave', 'North Hollywood', 'CA', '91601', '707');
