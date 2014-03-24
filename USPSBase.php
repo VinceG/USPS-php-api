@@ -152,6 +152,11 @@ class USPSBase {
     $opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
     $opts[CURLOPT_URL] = $this->getEndpoint();
 
+    // Replace 443 with 80 if it's not secured
+    if(strpos($opts[CURLOPT_URL], 'https://')===false) {
+      $opts[CURLOPT_PORT] = 80;
+    }
+
     // set options
     curl_setopt_array($ch, $opts);
 
