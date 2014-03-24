@@ -6,8 +6,8 @@ require_once('../USPSOpenDistributeLabel.php');
 $label = new USPSOpenDistributeLabel('928CAPTU2771');
 
 
-$label->setFromAddress('Erik', 'Richard', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204');
-$label->setToAddress('Landmark Network', '5440 Tujunga Ave', 'North Hollywood', 'CA', '91601', '707');
+$label->setFromAddress('John', 'Doe', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204');
+$label->setToAddress('Vincent Gabriel', '5440 Tujunga Ave', 'North Hollywood', 'CA', '91601', '707');
 $label->setWeightOunces(1);
 
 // Perform the request and return result

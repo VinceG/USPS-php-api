@@ -8,7 +8,7 @@ $label = new USPSPriorityLabel('928CAPTU2771');
 // During test mode this seems not to always work as expected
 $label->setTestMode(true);
 
-$label->setFromAddress('Erik', 'Richard', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204', '', '8882721214');
+$label->setFromAddress('John', 'Doe', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204', '', '8882721214');
 $label->setToAddress('Vincent', 'Gabriel', '', '230 Murray St', 'New York', 'NY', '10282');
 $label->setWeightOunces(1);
 $label->setField(36, 'LabelDate', '03/12/2014');

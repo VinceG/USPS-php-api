@@ -17,7 +17,7 @@ $label->setApiVersion('FirstClassMailIntl');
 // During test mode this seems not to always work as expected
 $label->setTestMode(true);
 
-$label->setFromAddress('Erik', 'Richard', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204');
+$label->setFromAddress('John', 'Dow', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204');
 $label->setToAddress('Vincent', 'Gabriel', '5440 Tujunga Ave', 'North Hollywood', 'CA', 'US', '91601', '# 707');
 $label->setWeightOunces(1);
 
