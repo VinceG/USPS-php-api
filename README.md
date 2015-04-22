@@ -22,6 +22,11 @@ Requirements
   - CUrl
 - USPS API Username
 
+Package
+=======
+
+https://packagist.org/packages/alexanderreiff/usps-php-api
+
 Examples
 =======
 
