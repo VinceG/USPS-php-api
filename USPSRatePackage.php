@@ -40,7 +40,8 @@ class USPSRatePackage extends USPSRate {
 	const MAIL_TYPE_LETTER = 'LETTER'; 
 	const MAIL_TYPE_FLAT = 'FLAT'; 
 	const MAIL_TYPE_PARCEL = 'PARCEL'; 
-	const MAIL_TYPE_POSTCARD = 'POSTCARD'; 
+	const MAIL_TYPE_POSTCARD = 'POSTCARD';
+	const MAIL_TYPE_PACKAGE = 'PACKAGE';
 	const MAIL_TYPE_PACKAGE_SERVICE = 'PACKAGE SERVICE'; 
 	/**
 	 * Container constants
