@@ -44,7 +44,7 @@ class USPSRate extends USPSBase {
 	 * @param string|int $key
 	 * @param string|int $value
  	 */		
-	public function addExtraOption(USPSRatePackage $data, $key, $value) {
+	public function addExtraOption($key, $value) {
 		$this->packages[$key][] = $value; 
 	}
 
