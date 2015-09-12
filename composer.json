@@ -1,5 +1,5 @@
 {
-	"name": "alexanderreiff/usps-php-api",
+	"name": "USPS/usps-php-api",
 	"type": "library",
 	"description": "PHP wrapper for USPS Web Tools API",
 	"keywords": ["usps", "api"],
