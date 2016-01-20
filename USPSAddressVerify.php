@@ -1,10 +1,6 @@
 <?php
-/**
- * Load required classes
- */
-require_once('USPSBase.php');
-require_once('USPSAddress.php');
 
+namespace USPS;
 /**
  * USPS Address Verify Class
  * used to verify an address is valid

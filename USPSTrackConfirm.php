@@ -1,9 +1,6 @@
 <?php
-/**
- * Load required classes
- */
-require_once('USPSBase.php');
 
+namespace USPS;
 /**
  */
 class USPSTrackConfirm extends USPSBase {

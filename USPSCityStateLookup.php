@@ -1,9 +1,7 @@
 <?php
-/**
- * Load required classes
- */
-require_once('USPSBase.php');
-/**
+
+namespace USPS;
+/*
  * USPS City/State lookup
  * used to find a city/state by a zipcode lookup
  * @since 1.0
