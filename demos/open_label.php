@@ -1,7 +1,7 @@
 <?php
 
 // Load the class
-require_once('../USPSOpenDistributeLabel.php');
+require_once('../OpenDistributeLabel.php');
 // Initiate and set the username provided from usps
 $label = new USPSOpenDistributeLabel('xxxx');
 

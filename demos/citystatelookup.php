@@ -1,6 +1,6 @@
 <?php
 // Load the class
-require_once('../USPSCityStateLookup.php');
+require_once('../CityStateLookup.php');
 
 // Initiate and set the username provided from usps
 $verify = new USPSCityStateLookup('xxxx');

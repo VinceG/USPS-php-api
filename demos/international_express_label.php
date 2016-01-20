@@ -1,7 +1,7 @@
 <?php
 
 // Load the class
-require_once('../USPSInternationalLabel.php');
+require_once('../InternationalLabel.php');
 // Initiate and set the username provided from usps
 $label = new USPSInternationalLabel('xxxx');
 

@@ -1,6 +1,6 @@
 <?php
 // Load the class
-require_once('../USPSRate.php');
+require_once('../Rate.php');
 
 // Initiate and set the username provided from usps
 $rate = new USPSRate('xxxx');
@@ -11,7 +11,7 @@ $rate = new USPSRate('xxxx');
 // Create new package object and assign the properties
 // apartently the order you assign them is important so make sure
 // to set them as the example below
-// set the USPSRatePackage for more info about the constants
+// set the RatePackage for more info about the constants
 $package = new USPSRatePackage;
 $package->setService(USPSRatePackage::SERVICE_FIRST_CLASS);
 $package->setFirstClassMailType(USPSRatePackage::MAIL_TYPE_LETTER);

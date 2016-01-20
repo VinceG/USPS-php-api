@@ -1,6 +1,6 @@
 <?php
 // Load the class
-require_once('../USPSFirstClassServiceStandards.php');
+require_once('../FirstClassServiceStandards.php');
 
 // Initiate and set the username provided from usps.
 $delivery = new USPSFirstClassServiceStandards('xxxx');

@@ -1,9 +1,9 @@
 <?php
 // Load the class
-require_once('../USPSServiceDeliveryCalculator.php');
+require_once('../ServiceDeliveryCalculator.php');
 
 // Initiate and set the username provided from usps
-$delivery = new USPSServiceDeliveryCalculator('xxxx');
+$delivery = new ServiceDeliveryCalculator('xxxx');
 
 // During test mode this seems not to always work as expected
 $delivery->setTestMode(true);

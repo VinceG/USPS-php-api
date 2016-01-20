@@ -1,7 +1,7 @@
 <?php
 
 // Load the class
-require_once('../USPSAddressVerify.php');
+require_once('../AddressVerify.php');
 // Initiate and set the username provided from usps
 $verify = new USPSAddressVerify('xxxx');
 

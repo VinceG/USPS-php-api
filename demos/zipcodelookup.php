@@ -1,6 +1,6 @@
 <?php
 // Load the class
-require_once('../USPSZipCodeLookup.php');
+require_once('../ZipCodeLookup.php');
 
 // Initiate and set the username provided from usps
 $zipcode = new USPSZipCodeLookup('xxxx');

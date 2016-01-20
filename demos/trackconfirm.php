@@ -1,6 +1,6 @@
 <?php
 // Load the class
-require_once('../USPSTrackConfirm.php');
+require_once('../TrackConfirm.php');
 
 // Initiate and set the username provided from usps
 $tracking = new USPSTrackConfirm('xxxx');

@@ -1,9 +1,9 @@
 <?php
 
 // Load the class
-require_once('../USPSPriorityLabel.php');
+require_once('../PriorityLabel.php');
 // Initiate and set the username provided from usps
-$label = new USPSPriorityLabel('xxxx');
+$label = new PriorityLabel('xxxx');
 
 // During test mode this seems not to always work as expected
 $label->setTestMode(true);
@@ -29,7 +29,7 @@ if($label->isSuccess()) {
   //echo "\n Confirmation:" . $label->getConfirmationNumber();
 
   $label = $label->getLabelContents();
-  
+
   if($label) {
   	$contents = base64_decode($label);
   	header('Content-type: application/pdf');
