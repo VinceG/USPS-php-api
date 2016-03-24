@@ -1,0 +1,31 @@
+{
+  "name":        "vinceg/usps-php-api",
+  "type":        "library",
+  "description": "PHP wrapper for USPS Web Tools API",
+  "keywords":    ["usps", "api"],
+  "license":     "MIT",
+  "authors":     [
+    {
+      "name":     "Vincent Gabriel",
+      "homepage": "http://vadimg.com",
+      "role":     "Developer"
+    },
+    {
+      "name": "Alexander Reiff",
+      "role": "Developer"
+    },
+    {
+      "name": "Ryan Hayle",
+      "role": "Developer"
+    }
+  ],
+  "require":     {
+    "php":      ">=5.4",
+    "ext-curl": "*"
+  },
+  "autoload":    {
+    "psr-4": {
+      "USPS\\": "src/"
+    }
+  }
+}

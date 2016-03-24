@@ -13,25 +13,22 @@ This wrapper allows you to perform some basic calls to the USPS api. Some of the
 - Service Delivery Calculator
 - Confirm Tracking
 
-
 Requirements
 ============
 
-- Apache 2 Web Server
-- PHP 5.x configured with the following extensions:
-  - CUrl
+- PHP >= 5.4 configured with the following extensions:
+  - cURL
 - USPS API Username
 
 Package
 =======
 
-https://packagist.org/packages/alexanderreiff/usps-php-api
+https://packagist.org/packages/vinceg/usps-php-api
 
 Examples
 =======
 
 Please check the 'demos' directory for usage examples on the various types of api calls and actions you can perform.
-
 
 Authors
 =======

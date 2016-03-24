@@ -1,9 +1,7 @@
 <?php
-// Load the class
-require_once('../USPSTrackConfirm.php');
 
 // Initiate and set the username provided from usps
-$tracking = new USPSTrackConfirm('xxxx');
+$tracking = new \USPS\TrackConfirm('xxxx');
 
 // During test mode this seems not to always work as expected
 $tracking->setTestMode(true);
@@ -16,10 +14,8 @@ print_r($tracking->getTracking());
 print_r($tracking->getArrayResponse());
 
 // Check if it was completed
-if($tracking->isSuccess()) {
-  echo 'Done';
+if ($tracking->isSuccess()) {
+    echo 'Done';
 } else {
-  echo 'Error: ' . $tracking->getErrorMessage();
+    echo 'Error: ' . $tracking->getErrorMessage();
 }
-
-?>

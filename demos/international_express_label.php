@@ -1,9 +1,7 @@
 <?php
 
-// Load the class
-require_once('../USPSInternationalLabel.php');
 // Initiate and set the username provided from usps
-$label = new USPSInternationalLabel('xxxx');
+$label = new \USPS\InternationalLabel('xxxx');
 
 // Express by default
 $label->setApiVersion('ExpressMailIntl');
@@ -29,23 +27,22 @@ $label->createLabel();
 //print_r($label->getArrayResponse());
 print_r($label->getPostData());
 //var_dump($label->isError());
-exit;
+
 // See if it was successful
-if($label->isSuccess()) {
-  echo 'Done';
-  echo "\n Confirmation:" . $label->getConfirmationNumber();
+if ($label->isSuccess()) {
+    echo 'Done';
+    echo "\n Confirmation:" . $label->getConfirmationNumber();
 
-  $label = $label->getLabelContents();
-  if($label) {
-  	 $contents = base64_decode($label);
-  	 header('Content-type: application/pdf');
-	   header('Content-Disposition: inline; filename="label.pdf"');
-	   header('Content-Transfer-Encoding: binary');
-	   header('Content-Length: ' . strlen($contents));
-	   echo $contents;
-	   exit;
-  }
-
+    $label = $label->getLabelContents();
+    if ($label) {
+        $contents = base64_decode($label);
+        header('Content-type: application/pdf');
+        header('Content-Disposition: inline; filename="label.pdf"');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: ' . strlen($contents));
+        echo $contents;
+        exit;
+    }
 } else {
-  echo 'Error: ' . $label->getErrorMessage();
+    echo 'Error: ' . $label->getErrorMessage();
 }

@@ -1,9 +1,7 @@
 <?php
-// Load the class
-require_once('../USPSFirstClassServiceStandards.php');
 
 // Initiate and set the username provided from usps.
-$delivery = new USPSFirstClassServiceStandards('xxxx');
+$delivery = new \USPS\FirstClassServiceStandards('xxxx');
 
 // During test mode this seems not to always work as expected.
 $delivery->setTestMode(true);
@@ -16,8 +14,8 @@ var_dump($delivery->getServiceStandard());
 var_dump($delivery->getArrayResponse());
 
 // Check if it was completed
-if($delivery->isSuccess()) {
-  echo 'Done';
+if ($delivery->isSuccess()) {
+    echo 'Done';
 } else {
-  echo 'Error: ' . $delivery->getErrorMessage();
+    echo 'Error: ' . $delivery->getErrorMessage();
 }

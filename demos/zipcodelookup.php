@@ -1,9 +1,7 @@
 <?php
-// Load the class
-require_once('../USPSZipCodeLookup.php');
 
 // Initiate and set the username provided from usps
-$zipcode = new USPSZipCodeLookup('xxxx');
+$zipcode = new \USPS\ZipCodeLookup('xxxx');
 
 // During test mode this seems not to always work as expected
 //$verify->setTestMode(true);
@@ -11,7 +9,7 @@ $zipcode = new USPSZipCodeLookup('xxxx');
 // Create new address object and assign the properties
 // apartently the order you assign them is important so make sure
 // to set them as the example below
-$address = new USPSAddress;
+$address = new \USPS\Address;
 $address->setFirmName('Apartment');
 $address->setApt('100');
 $address->setAddress('9200 Milliken Ave');
@@ -26,8 +24,8 @@ print_r($zipcode->lookup());
 print_r($zipcode->getArrayResponse());
 
 // Check if it was completed
-if($zipcode->isSuccess()) {
-  echo 'Done';
+if ($zipcode->isSuccess()) {
+    echo 'Done';
 } else {
-  echo 'Error: ' . $zipcode->getErrorMessage();
+    echo 'Error: ' . $zipcode->getErrorMessage();
 }

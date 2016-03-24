@@ -1,9 +1,7 @@
 <?php
 
-// Load the class
-require_once('../USPSAddressVerify.php');
 // Initiate and set the username provided from usps
-$verify = new USPSAddressVerify('xxxx');
+$verify = new \USPS\AddressVerify('xxxx');
 
 // During test mode this seems not to always work as expected
 //$verify->setTestMode(true);
@@ -11,7 +9,7 @@ $verify = new USPSAddressVerify('xxxx');
 // Create new address object and assign the properties
 // apartently the order you assign them is important so make sure
 // to set them as the example below
-$address = new USPSAddress;
+$address = new \USPS\Address;
 $address->setFirmName('Apartment');
 $address->setApt('100');
 $address->setAddress('9200 Milliken Ave');
@@ -30,8 +28,8 @@ print_r($verify->getArrayResponse());
 var_dump($verify->isError());
 
 // See if it was successful
-if($verify->isSuccess()) {
-  echo 'Done';
+if ($verify->isSuccess()) {
+    echo 'Done';
 } else {
-  echo 'Error: ' . $verify->getErrorMessage();
+    echo 'Error: ' . $verify->getErrorMessage();
 }
