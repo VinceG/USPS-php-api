@@ -181,4 +181,117 @@ class RatePackage extends Rate
     {
         return $this->packageInfo;
     }
+    
+    //MATT ADD ON
+    
+        
+    /**
+     * Set the mail type property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    
+       
+    public function setMailType($value)
+    {
+        return $this->setField('MailType', $value);
+    }
+    
+        
+    /**
+     * Set the gxg property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    
+    public function setGXG()
+    {
+        $array = array(
+            'POBoxFlag'=>'Y',
+            'GiftFlag'=>'N'
+            );
+        return $this->setField('GXG', $array);
+    }
+    
+        
+    /**
+     * Set the value of contents
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    
+    public function setValueOfContents($value)
+    {
+        return $this->setField('ValueOfContents', $value);
+    }
+    
+        
+    /**
+     * Set the orgin country property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    public function setCountryOrigination($value)
+    {
+        return $this->setField('Country', $value);
+    }
+    
+    
+        
+    /**
+     * Set the width property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    public function setWidth($value)
+    {
+        return $this->setField('Width', $value);
+    }
+    
+        
+    /**
+     * Set the length property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    
+    public function setLength($value)
+    {
+        return $this->setField('Length', $value);
+    }
+    
+        
+    /**
+     * Set the height property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    
+    
+    public function setHeight($value)
+    {
+        return $this->setField('Height', $value);
+    }
+    
+        
+    /**
+     * Set the girth property
+     *
+     * @param string|int $value
+     * @return object RatePackage
+     */
+    
+    public function setGirth($value)
+    {
+        return $this->setField('Girth', $value);
+    }
+    
+
 }
