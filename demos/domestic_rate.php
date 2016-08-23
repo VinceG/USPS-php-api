@@ -12,7 +12,7 @@ $rate = new \USPS\Rate('xxxx');
 // apartently the order you assign them is important so make sure
 // to set them as the example below
 // set the RatePackage for more info about the constants
-$package = new RatePackage;
+$package = new RatePackage();
 $package->setService(RatePackage::SERVICE_FIRST_CLASS);
 $package->setFirstClassMailType(RatePackage::MAIL_TYPE_LETTER);
 $package->setZipOrigination(91601);
@@ -34,5 +34,5 @@ print_r($rate->getArrayResponse());
 if ($rate->isSuccess()) {
     echo 'Done';
 } else {
-    echo 'Error: ' . $rate->getErrorMessage();
+    echo 'Error: '.$rate->getErrorMessage();
 }

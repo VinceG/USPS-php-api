@@ -2,7 +2,7 @@
 
 namespace USPS;
 
-/**
+/*
  * XML2Array: A class to convert XML to array in PHP
  * It returns the array which can be converted back to XML using the Array2XML script
  * It takes an XML string or a DOMDocument object as an input.
@@ -30,7 +30,7 @@ class XML2Array
     private static $encoding = 'UTF-8';
 
     /**
-     * Initialize the root XML node [optional]
+     * Initialize the root XML node [optional].
      *
      * @param $version
      * @param $encoding
@@ -38,17 +38,19 @@ class XML2Array
      */
     public static function init($version = '1.0', $encoding = 'UTF-8', $format_output = true)
     {
-        self::$xml               = new DOMDocument($version, $encoding);
+        self::$xml = new DOMDocument($version, $encoding);
         self::$xml->formatOutput = $format_output;
-        self::$encoding          = $encoding;
+        self::$encoding = $encoding;
     }
 
     /**
-     * Convert an XML string or DOMDocument to an Array
+     * Convert an XML string or DOMDocument to an Array.
      *
      * @param $input_xml string|DOMDocument
-     * @return array
+     *
      * @throws Exception
+     *
+     * @return array
      */
     public static function &createArray($input_xml)
     {
@@ -56,11 +58,11 @@ class XML2Array
 
         if (is_string($input_xml)) {
             $parsed = $xml->loadXML($input_xml);
-            if (! $parsed) {
+            if (!$parsed) {
                 throw new Exception('[XML2Array] Error parsing the XML string.');
             }
         } else {
-            if (! $input_xml instanceof DOMDocument) {
+            if (!$input_xml instanceof DOMDocument) {
                 throw new Exception('[XML2Array] The input XML object should be of type: DOMDocument.');
             }
             $xml = self::$xml = $input_xml;
@@ -74,9 +76,10 @@ class XML2Array
     }
 
     /**
-     * Convert an Array to XML
+     * Convert an Array to XML.
      *
      * @param mixed $node - XML as a string or as an object of DOMDocument
+     *
      * @return mixed
      */
     private static function &convert($node)
@@ -96,12 +99,12 @@ class XML2Array
                 // for each child node, call the covert function recursively
                 for ($i = 0, $m = $node->childNodes->length; $i < $m; $i++) {
                     $child = $node->childNodes->item($i);
-                    $v     = self::convert($child);
+                    $v = self::convert($child);
                     if (isset($child->tagName)) {
                         $t = $child->tagName;
 
                         // assume more nodes of same kind are coming
-                        if (! isset($output[$t])) {
+                        if (!isset($output[$t])) {
                             $output[$t] = [];
                         }
                         $output[$t][] = $v;
@@ -133,7 +136,7 @@ class XML2Array
                         $a[$attrName] = (string) $attrNode->value;
                     }
                     // if its an leaf node, store the value in @value instead of directly storing it.
-                    if (! is_array($output)) {
+                    if (!is_array($output)) {
                         $output = ['@value' => $output];
                     }
                     $output['@attributes'] = $a;

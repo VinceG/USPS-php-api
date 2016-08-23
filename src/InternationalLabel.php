@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class InternationalLabel
- *
- * @package USPS
+ * Class InternationalLabel.
  */
 class InternationalLabel extends USPSBase
 {
@@ -53,7 +51,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Return the USPS confirmation/tracking number if we have one
+     * Return the USPS confirmation/tracking number if we have one.
      *
      * @return string|bool
      */
@@ -71,7 +69,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Return the USPS label as a base64 encoded string
+     * Return the USPS label as a base64 encoded string.
      *
      * @return string|bool
      */
@@ -89,7 +87,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * returns array of all fields added
+     * returns array of all fields added.
      *
      * @return array
      */
@@ -99,7 +97,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Add shipping contents
+     * Add shipping contents.
      *
      * @param      $description
      * @param      $value
@@ -108,6 +106,7 @@ class InternationalLabel extends USPSBase
      * @param int  $quantity
      * @param null $tarrifNumber
      * @param null $countryOfOrigin
+     *
      * @return object
      */
     public function addContent(
@@ -133,7 +132,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Set the from address
+     * Set the from address.
      *
      * @param string $firstName
      * @param string $lastName
@@ -146,6 +145,7 @@ class InternationalLabel extends USPSBase
      * @param string $zip4
      * @param string $phone
      * @param string $middleName
+     *
      * @return object
      */
     public function setFromAddress(
@@ -177,7 +177,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Set the to address
+     * Set the to address.
      *
      * @param string $firstName
      * @param string $lastName
@@ -192,7 +192,9 @@ class InternationalLabel extends USPSBase
      * @param string $phone
      * @param null   $fax
      * @param null   $email
+     *
      * @return object
+     *
      * @internal param string $state
      * @internal param string $zip4
      */
@@ -230,24 +232,26 @@ class InternationalLabel extends USPSBase
 
     /**
      * Set any other requried string make sure you set the correct position as well
-     * as the position of the items matters
+     * as the position of the items matters.
      *
      * @param int    $position
      * @param string $key
      * @param string $value
+     *
      * @return object
      */
     public function setField($position, $key, $value)
     {
-        $this->fields[$position . ':' . $key] = $value;
+        $this->fields[$position.':'.$key] = $value;
 
         return $this;
     }
 
     /**
-     * Set package weight in ounces
+     * Set package weight in ounces.
      *
      * @param $weight
+     *
      * @return $this
      */
     public function setWeightOunces($weight)
@@ -258,9 +262,10 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Set package weight in ounces
+     * Set package weight in ounces.
      *
      * @param $weight
+     *
      * @return $this
      */
     public function setWeightPounds($weight)
@@ -271,7 +276,7 @@ class InternationalLabel extends USPSBase
     }
 
     /**
-     * Add missing required elements
+     * Add missing required elements.
      *
      * @return void
      */
@@ -324,7 +329,7 @@ class InternationalLabel extends USPSBase
 
         foreach ($required as $item => $value) {
             $explode = explode(':', $item);
-            if (! isset($this->fields[$item])) {
+            if (!isset($this->fields[$item])) {
                 $this->setField($explode[0], $explode[1], $value);
             }
         }

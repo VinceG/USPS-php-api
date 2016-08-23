@@ -9,7 +9,7 @@ $verify = new \USPS\AddressVerify('xxxx');
 // Create new address object and assign the properties
 // apartently the order you assign them is important so make sure
 // to set them as the example below
-$address = new \USPS\Address;
+$address = new \USPS\Address();
 $address->setFirmName('Apartment');
 $address->setApt('100');
 $address->setAddress('9200 Milliken Ave');
@@ -31,5 +31,5 @@ var_dump($verify->isError());
 if ($verify->isSuccess()) {
     echo 'Done';
 } else {
-    echo 'Error: ' . $verify->getErrorMessage();
+    echo 'Error: '.$verify->getErrorMessage();
 }

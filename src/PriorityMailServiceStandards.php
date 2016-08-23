@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class PriorityMailServiceStandards
- *
- * @package USPS
+ * Class PriorityMailServiceStandards.
  */
 class PriorityMailServiceStandards extends USPSBase
 {

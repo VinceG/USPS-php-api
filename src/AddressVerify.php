@@ -4,9 +4,10 @@ namespace USPS;
 
 /**
  * USPS Address Verify Class
- * used to verify an address is valid
+ * used to verify an address is valid.
  *
  * @since  1.0
+ *
  * @author Vincent Gabriel
  */
 class AddressVerify extends USPSBase
@@ -21,7 +22,7 @@ class AddressVerify extends USPSBase
     protected $addresses = [];
 
     /**
-     * Perform the API call to verify the address
+     * Perform the API call to verify the address.
      *
      * @return string
      */
@@ -31,7 +32,7 @@ class AddressVerify extends USPSBase
     }
 
     /**
-     * returns array of all addresses added so far
+     * returns array of all addresses added so far.
      *
      * @return array
      */
@@ -41,10 +42,10 @@ class AddressVerify extends USPSBase
     }
 
     /**
-     * Add Address to the stack
+     * Add Address to the stack.
      *
      * @param Address $data
-     * @param string  $id the address unique id
+     * @param string  $id   the address unique id
      */
     public function addAddress(Address $data, $id = null)
     {

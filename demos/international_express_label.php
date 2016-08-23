@@ -31,7 +31,7 @@ print_r($label->getPostData());
 // See if it was successful
 if ($label->isSuccess()) {
     echo 'Done';
-    echo "\n Confirmation:" . $label->getConfirmationNumber();
+    echo "\n Confirmation:".$label->getConfirmationNumber();
 
     $label = $label->getLabelContents();
     if ($label) {
@@ -39,10 +39,10 @@ if ($label->isSuccess()) {
         header('Content-type: application/pdf');
         header('Content-Disposition: inline; filename="label.pdf"');
         header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . strlen($contents));
+        header('Content-Length: '.strlen($contents));
         echo $contents;
         exit;
     }
 } else {
-    echo 'Error: ' . $label->getErrorMessage();
+    echo 'Error: '.$label->getErrorMessage();
 }
