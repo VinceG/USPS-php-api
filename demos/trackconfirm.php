@@ -7,7 +7,7 @@ $tracking = new \USPS\TrackConfirm('xxxx');
 $tracking->setTestMode(true);
 
 // Add the test package id to the trackconfirm lookup class
-$tracking->addPackage("EJ958083578US");
+$tracking->addPackage('EJ958083578US');
 
 // Perform the call and print out the results
 print_r($tracking->getTracking());
@@ -17,5 +17,5 @@ print_r($tracking->getArrayResponse());
 if ($tracking->isSuccess()) {
     echo 'Done';
 } else {
-    echo 'Error: ' . $tracking->getErrorMessage();
+    echo 'Error: '.$tracking->getErrorMessage();
 }

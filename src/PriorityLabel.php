@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class PriorityLabel
- *
- * @package USPS
+ * Class PriorityLabel.
  */
 class PriorityLabel extends USPSBase
 {
@@ -46,7 +44,7 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * Return the USPS confirmation/tracking number if we have one
+     * Return the USPS confirmation/tracking number if we have one.
      *
      * @return string|bool
      */
@@ -64,7 +62,7 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * Return the USPS label as a base64 encoded string
+     * Return the USPS label as a base64 encoded string.
      *
      * @return string|bool
      */
@@ -82,7 +80,7 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * Return the USPS receipt as a base64 encoded string
+     * Return the USPS receipt as a base64 encoded string.
      *
      * @return string|bool
      */
@@ -100,7 +98,7 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * returns array of all fields added
+     * returns array of all fields added.
      *
      * @return array
      */
@@ -110,7 +108,7 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * Set the from address
+     * Set the from address.
      *
      * @param string $firstName
      * @param string $lastName
@@ -122,6 +120,7 @@ class PriorityLabel extends USPSBase
      * @param string $address2
      * @param string $zip4
      * @param string $phone
+     *
      * @return object
      */
     public function setFromAddress(
@@ -151,7 +150,7 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * Set the to address
+     * Set the to address.
      *
      * @param string $firstName
      * @param string $lastName
@@ -163,6 +162,7 @@ class PriorityLabel extends USPSBase
      * @param string $address2
      * @param string $zip4
      * @param string $phone
+     *
      * @return object
      */
     public function setToAddress(
@@ -192,9 +192,10 @@ class PriorityLabel extends USPSBase
     }
 
     /**
-     * Set package weight in ounces
+     * Set package weight in ounces.
      *
      * @param $weight
+     *
      * @return $this
      */
     public function setWeightOunces($weight)
@@ -206,22 +207,23 @@ class PriorityLabel extends USPSBase
 
     /**
      * Set any other requried string make sure you set the correct position as well
-     * as the position of the items matters
+     * as the position of the items matters.
      *
      * @param int    $position
      * @param string $key
      * @param string $value
+     *
      * @return object
      */
     public function setField($position, $key, $value)
     {
-        $this->fields[$position . ':' . $key] = $value;
+        $this->fields[$position.':'.$key] = $value;
 
         return $this;
     }
 
     /**
-     * Add missing required elements
+     * Add missing required elements.
      *
      * @return void
      */
@@ -262,7 +264,7 @@ class PriorityLabel extends USPSBase
 
         foreach ($required as $item => $value) {
             $explode = explode(':', $item);
-            if (! isset($this->fields[$item])) {
+            if (!isset($this->fields[$item])) {
                 $this->setField($explode[0], $explode[1], $value);
             }
         }

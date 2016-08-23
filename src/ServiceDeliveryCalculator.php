@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class ServiceDeliveryCalculator
- *
- * @package USPS
+ * Class ServiceDeliveryCalculator.
  */
 class ServiceDeliveryCalculator extends USPSBase
 {
@@ -59,15 +57,12 @@ class ServiceDeliveryCalculator extends USPSBase
             'OriginZIP'      => $origin_zip,
             'DestinationZIP' => $destination_zip,
         ];
-        if (! empty($accept_date)) {
+        if (!empty($accept_date)) {
             $route['AcceptDate'] = $accept_date;
         }
-        if (! empty($accept_time)) {
+        if (!empty($accept_time)) {
             $route['AcceptTime'] = $accept_time;
         }
         $this->route = $route;
     }
 }
-
-
-

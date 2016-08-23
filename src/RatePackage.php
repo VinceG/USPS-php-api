@@ -4,9 +4,10 @@ namespace USPS;
 
 /**
  * USPS Rate Package
- * used by the ups rate class to create packages represented as objects
+ * used by the ups rate class to create packages represented as objects.
  *
  * @since  1.0
+ *
  * @author Vincent Gabriel
  */
 class RatePackage extends Rate
@@ -16,7 +17,7 @@ class RatePackage extends Rate
      */
     protected $packageInfo = [];
     /**
-     * Services constants
+     * Services constants.
      */
     const SERVICE_FIRST_CLASS = 'FIRST CLASS';
     const SERVICE_FIRST_CLASS_COMMERCIAL = 'FIRST CLASS COMMERCIAL';
@@ -37,7 +38,7 @@ class RatePackage extends Rate
     const SERVICE_ONLINE = 'ONLINE';
     /**
      * First class mail type
-     * required when you use one of the first class services
+     * required when you use one of the first class services.
      */
     const MAIL_TYPE_LETTER = 'LETTER';
     const MAIL_TYPE_FLAT = 'FLAT';
@@ -46,7 +47,7 @@ class RatePackage extends Rate
     const MAIL_TYPE_PACKAGE = 'PACKAGE';
     const MAIL_TYPE_PACKAGE_SERVICE = 'PACKAGE SERVICE';
     /**
-     * Container constants
+     * Container constants.
      */
     const CONTAINER_VARIABLE = 'VARIABLE';
     const CONTAINER_FLAT_RATE_ENVELOPE = 'FLAT RATE ENVELOPE';
@@ -65,15 +66,16 @@ class RatePackage extends Rate
     const CONTAINER_RECTANGULAR = 'RECTANGULAR';
     const CONTAINER_NONRECTANGULAR = 'NONRECTANGULAR';
     /**
-     * Size constants
+     * Size constants.
      */
     const SIZE_LARGE = 'LARGE';
     const SIZE_REGULAR = 'REGULAR';
 
     /**
-     * Set the service property
+     * Set the service property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setService($value)
@@ -82,9 +84,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the first class mail type property
+     * Set the first class mail type property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setFirstClassMailType($value)
@@ -93,9 +96,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the zip origin property
+     * Set the zip origin property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setZipOrigination($value)
@@ -104,9 +108,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the zip destination property
+     * Set the zip destination property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setZipDestination($value)
@@ -115,9 +120,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the pounds property
+     * Set the pounds property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setPounds($value)
@@ -126,9 +132,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the ounces property
+     * Set the ounces property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setOunces($value)
@@ -137,9 +144,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the container property
+     * Set the container property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setContainer($value)
@@ -148,9 +156,10 @@ class RatePackage extends Rate
     }
 
     /**
-     * Set the size property
+     * Set the size property.
      *
      * @param string|int $value
+     *
      * @return object RatePackage
      */
     public function setSize($value)
@@ -159,10 +168,11 @@ class RatePackage extends Rate
     }
 
     /**
-     * Add an element to the stack
+     * Add an element to the stack.
      *
      * @param string|int $key
      * @param string|int $value
+     *
      * @return object USPSAddress
      */
     public function setField($key, $value)
@@ -173,7 +183,7 @@ class RatePackage extends Rate
     }
 
     /**
-     * Returns a list of all the info we gathered so far in the current package object
+     * Returns a list of all the info we gathered so far in the current package object.
      *
      * @return array
      */

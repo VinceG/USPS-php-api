@@ -4,9 +4,10 @@ namespace USPS;
 
 /**
  * USPS Rate calculator class
- * used to get a rate for shipping methods
+ * used to get a rate for shipping methods.
  *
  * @since  1.0
+ *
  * @author Vincent Gabriel
  */
 class Rate extends USPSBase
@@ -21,7 +22,7 @@ class Rate extends USPSBase
     protected $packages = [];
 
     /**
-     * Perform the API call
+     * Perform the API call.
      *
      * @return string
      */
@@ -31,7 +32,7 @@ class Rate extends USPSBase
     }
 
     /**
-     * returns array of all packages added so far
+     * returns array of all packages added so far.
      *
      * @return array
      */
@@ -41,9 +42,10 @@ class Rate extends USPSBase
     }
 
     /**
-     * sets the type of call to perform domestic or international
+     * sets the type of call to perform domestic or international.
      *
      * @param $status
+     *
      * @return array
      */
     public function setInternationalCall($status)
@@ -52,7 +54,7 @@ class Rate extends USPSBase
     }
 
     /**
-     * Add other option for International & Insurance
+     * Add other option for International & Insurance.
      *
      * @param string|int $key
      * @param string|int $value
@@ -63,10 +65,10 @@ class Rate extends USPSBase
     }
 
     /**
-     * Add Package to the stack
+     * Add Package to the stack.
      *
      * @param RatePackage $data
-     * @param string      $id the address unique id
+     * @param string      $id   the address unique id
      */
     public function addPackage(RatePackage $data, $id = null)
     {

@@ -18,5 +18,5 @@ var_dump($delivery->getArrayResponse());
 if ($delivery->isSuccess()) {
     echo 'Done';
 } else {
-    echo 'Error: ' . $delivery->getErrorMessage();
+    echo 'Error: '.$delivery->getErrorMessage();
 }

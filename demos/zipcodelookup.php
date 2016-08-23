@@ -9,7 +9,7 @@ $zipcode = new \USPS\ZipCodeLookup('xxxx');
 // Create new address object and assign the properties
 // apartently the order you assign them is important so make sure
 // to set them as the example below
-$address = new \USPS\Address;
+$address = new \USPS\Address();
 $address->setFirmName('Apartment');
 $address->setApt('100');
 $address->setAddress('9200 Milliken Ave');
@@ -27,5 +27,5 @@ print_r($zipcode->getArrayResponse());
 if ($zipcode->isSuccess()) {
     echo 'Done';
 } else {
-    echo 'Error: ' . $zipcode->getErrorMessage();
+    echo 'Error: '.$zipcode->getErrorMessage();
 }

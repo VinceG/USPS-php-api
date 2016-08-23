@@ -4,9 +4,10 @@ namespace USPS;
 
 /**
  * USPS Address Class
- * used across other class to create addresses represented as objects
+ * used across other class to create addresses represented as objects.
  *
  * @since  1.0
+ *
  * @author Vincent Gabriel
  */
 class Address
@@ -17,9 +18,10 @@ class Address
     protected $addressInfo = [];
 
     /**
-     * Set the address2 property
+     * Set the address2 property.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setAddress($value)
@@ -28,9 +30,10 @@ class Address
     }
 
     /**
-     * Set the address1 property usually the apt or suit number
+     * Set the address1 property usually the apt or suit number.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setApt($value)
@@ -39,9 +42,10 @@ class Address
     }
 
     /**
-     * Set the city property
+     * Set the city property.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setCity($value)
@@ -50,9 +54,10 @@ class Address
     }
 
     /**
-     * Set the state property
+     * Set the state property.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setState($value)
@@ -61,9 +66,10 @@ class Address
     }
 
     /**
-     * Set the zip4 property - zip code value represented by 4 integers
+     * Set the zip4 property - zip code value represented by 4 integers.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setZip4($value)
@@ -72,9 +78,10 @@ class Address
     }
 
     /**
-     * Set the zip5 property - zip code value represented by 5 integers
+     * Set the zip5 property - zip code value represented by 5 integers.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setZip5($value)
@@ -83,9 +90,10 @@ class Address
     }
 
     /**
-     * Set the firmname property
+     * Set the firmname property.
      *
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setFirmName($value)
@@ -94,10 +102,11 @@ class Address
     }
 
     /**
-     * Add an element to the stack
+     * Add an element to the stack.
      *
      * @param string|int $key
      * @param string|int $value
+     *
      * @return object Address
      */
     public function setField($key, $value)
@@ -108,7 +117,7 @@ class Address
     }
 
     /**
-     * Returns a list of all the info we gathered so far in the current address object
+     * Returns a list of all the info we gathered so far in the current address object.
      *
      * @return array
      */

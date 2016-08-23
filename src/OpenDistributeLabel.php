@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class OpenDistributeLabel
- *
- * @package USPS
+ * Class OpenDistributeLabel.
  */
 class OpenDistributeLabel extends USPSBase
 {
@@ -46,7 +44,7 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * Return the USPS confirmation/tracking number if we have one
+     * Return the USPS confirmation/tracking number if we have one.
      *
      * @return string|bool
      */
@@ -64,7 +62,7 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * Return the USPS label as a base64 encoded string
+     * Return the USPS label as a base64 encoded string.
      *
      * @return string|bool
      */
@@ -83,7 +81,7 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * returns array of all fields added
+     * returns array of all fields added.
      *
      * @return array
      */
@@ -93,7 +91,7 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * Set the from address
+     * Set the from address.
      *
      * @param string $firstName
      * @param string $lastName
@@ -104,6 +102,7 @@ class OpenDistributeLabel extends USPSBase
      * @param string $zip
      * @param string $address2
      * @param string $zip4
+     *
      * @return object
      */
     public function setFromAddress(
@@ -117,7 +116,7 @@ class OpenDistributeLabel extends USPSBase
         $address2 = null,
         $zip4 = null
     ) {
-        $this->setField(5, 'FromName', trim($firstName . ' ' . $lastName));
+        $this->setField(5, 'FromName', trim($firstName.' '.$lastName));
         $this->setField(7, 'FromFirm', $company);
         $this->setField(8, 'FromAddress1', $address2);
         $this->setField(9, 'FromAddress2', $address);
@@ -130,7 +129,7 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * Set the to address
+     * Set the to address.
      *
      * @param string $company
      * @param string $address
@@ -139,6 +138,7 @@ class OpenDistributeLabel extends USPSBase
      * @param string $zip
      * @param string $address2
      * @param string $zip4
+     *
      * @return object
      */
     public function setToAddress($company, $address, $city, $state, $zip, $address2 = null, $zip4 = null)
@@ -155,9 +155,10 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * Set package weight in ounces
+     * Set package weight in ounces.
      *
      * @param $weight
+     *
      * @return $this
      */
     public function setWeightOunces($weight)
@@ -168,9 +169,10 @@ class OpenDistributeLabel extends USPSBase
     }
 
     /**
-     * Set package weight in ounces
+     * Set package weight in ounces.
      *
      * @param $weight
+     *
      * @return $this
      */
     public function setWeightPounds($weight)
@@ -182,22 +184,23 @@ class OpenDistributeLabel extends USPSBase
 
     /**
      * Set any other requried string make sure you set the correct position as well
-     * as the position of the items matters
+     * as the position of the items matters.
      *
      * @param int    $position
      * @param string $key
      * @param string $value
+     *
      * @return object
      */
     public function setField($position, $key, $value)
     {
-        $this->fields[$position . ':' . $key] = $value;
+        $this->fields[$position.':'.$key] = $value;
 
         return $this;
     }
 
     /**
-     * Add missing required elements
+     * Add missing required elements.
      *
      * @return void
      */
@@ -223,7 +226,7 @@ class OpenDistributeLabel extends USPSBase
 
         foreach ($required as $item => $value) {
             $explode = explode(':', $item);
-            if (! isset($this->fields[$item])) {
+            if (!isset($this->fields[$item])) {
                 $this->setField($explode[0], $explode[1], $value);
             }
         }

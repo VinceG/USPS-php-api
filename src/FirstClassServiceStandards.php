@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class FirstClassServiceStandards
- *
- * @package USPS
+ * Class FirstClassServiceStandards.
  */
 class FirstClassServiceStandards extends USPSBase
 {

@@ -3,9 +3,7 @@
 namespace USPS;
 
 /**
- * Class TrackConfirm
- *
- * @package USPS
+ * Class TrackConfirm.
  */
 class TrackConfirm extends USPSBase
 {
@@ -24,7 +22,7 @@ class TrackConfirm extends USPSBase
     }
 
     /**
-     * Perform the API call
+     * Perform the API call.
      *
      * @return string
      */
@@ -34,7 +32,7 @@ class TrackConfirm extends USPSBase
     }
 
     /**
-     * returns array of all packages added so far
+     * returns array of all packages added so far.
      *
      * @return array
      */
@@ -44,9 +42,10 @@ class TrackConfirm extends USPSBase
     }
 
     /**
-     * Add Package to the stack
+     * Add Package to the stack.
      *
      * @param string $id the address unique id
+     *
      * @return void
      */
     public function addPackage($id)

@@ -4,9 +4,10 @@ namespace USPS;
 
 /**
  * USPS Base class
- * used to perform the actual api calls
+ * used to perform the actual api calls.
  *
  * @since  1.0
+ *
  * @author Vincent Gabriel
  */
 abstract class USPSBase
@@ -19,49 +20,49 @@ abstract class USPSBase
      */
     protected $username = '';
     /**
-     *  the error code if one exists
+     *  the error code if one exists.
      *
-     * @var integer
+     * @var int
      */
     protected $errorCode = 0;
     /**
-     * the error message if one exists
+     * the error message if one exists.
      *
      * @var string
      */
     protected $errorMessage = '';
     /**
-     *  the response message
+     *  the response message.
      *
      * @var string
      */
     protected $response = '';
     /**
-     *  the headers returned from the call made
+     *  the headers returned from the call made.
      *
      * @var array
      */
     protected $headers = '';
     /**
-     * The response represented as an array
+     * The response represented as an array.
      *
      * @var array
      */
     protected $arrayResponse = [];
     /**
-     * All the post fields we will add to the call
+     * All the post fields we will add to the call.
      *
      * @var array
      */
     protected $postFields = [];
     /**
-     * The api type we are about to call
+     * The api type we are about to call.
      *
      * @var string
      */
     protected $apiVersion = '';
     /**
-     * @var boolean - set whether we are in a test mode or not
+     * @var bool - set whether we are in a test mode or not
      */
     public static $testMode = false;
     /**
@@ -100,7 +101,7 @@ abstract class USPSBase
     ];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $username - the usps api username
      */
@@ -110,7 +111,7 @@ abstract class USPSBase
     }
 
     /**
-     * set the usps api username we are going to user
+     * set the usps api username we are going to user.
      *
      * @param string $username - the usps api username
      */
@@ -120,7 +121,7 @@ abstract class USPSBase
     }
 
     /**
-     * Return the post data fields as an array
+     * Return the post data fields as an array.
      *
      * @return array
      */
@@ -132,9 +133,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set the api version we are going to use
+     * Set the api version we are going to use.
      *
      * @param string $version the new api version
+     *
      * @return void
      */
     public function setApiVersion($version)
@@ -143,9 +145,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set whether we are in a test mode or not
+     * Set whether we are in a test mode or not.
      *
-     * @param boolean $value
+     * @param bool $value
+     *
      * @return void
      */
     public function setTestMode($value)
@@ -154,7 +157,7 @@ abstract class USPSBase
     }
 
     /**
-     * Response api name
+     * Response api name.
      *
      * @return string
      */
@@ -169,17 +172,18 @@ abstract class USPSBase
      * make the request.
      *
      * @param resource $ch Optional initialized cURL handle
-     * @return String the response text
+     *
+     * @return string the response text
      */
     protected function doRequest($ch = null)
     {
-        if (! $ch) {
+        if (!$ch) {
             $ch = curl_init();
         }
 
-        $opts                     = self::$CURL_OPTS;
+        $opts = self::$CURL_OPTS;
         $opts[CURLOPT_POSTFIELDS] = http_build_query($this->getPostData(), null, '&');
-        $opts[CURLOPT_URL]        = $this->getEndpoint();
+        $opts[CURLOPT_URL] = $this->getEndpoint();
 
         // Replace 443 with 80 if it's not secured
         if (strpos($opts[CURLOPT_URL], 'https://') === false) {
@@ -227,7 +231,7 @@ abstract class USPSBase
     abstract public function getPostFields();
 
     /**
-     * Return the xml string built that we are about to send over to the api
+     * Return the xml string built that we are about to send over to the api.
      *
      * @return string
      */
@@ -249,11 +253,11 @@ abstract class USPSBase
     /**
      * Did we encounter an error?
      *
-     * @return boolean
+     * @return bool
      */
     public function isError()
     {
-        $headers  = $this->getHeaders();
+        $headers = $this->getHeaders();
         $response = $this->getArrayResponse();
         // First make sure we got a valid response
         if ($headers['http_code'] != 200) {
@@ -275,17 +279,17 @@ abstract class USPSBase
     }
 
     /**
-     * Was the last call successful
+     * Was the last call successful.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSuccess()
     {
-        return ! $this->isError() ? true : false;
+        return !$this->isError() ? true : false;
     }
 
     /**
-     * Return the response represented as string
+     * Return the response represented as string.
      *
      * @return array
      */
@@ -299,9 +303,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set the array response value
+     * Set the array response value.
      *
      * @param array $value
+     *
      * @return void
      */
     public function setArrayResponse($value)
@@ -310,7 +315,7 @@ abstract class USPSBase
     }
 
     /**
-     * Return the array representation of the last response
+     * Return the array representation of the last response.
      *
      * @return array
      */
@@ -320,9 +325,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set the response
+     * Set the response.
      *
      * @param mixed $response The response returned from the call
+     *
      * @return self
      */
     public function setResponse($response = '')
@@ -333,7 +339,7 @@ abstract class USPSBase
     }
 
     /**
-     * Get the response data
+     * Get the response data.
      *
      * @return mixed the response data
      */
@@ -343,9 +349,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set the headers
+     * Set the headers.
      *
      * @param array $headers the headers array
+     *
      * @return self
      */
     public function setHeaders($headers = [])
@@ -356,7 +363,7 @@ abstract class USPSBase
     }
 
     /**
-     * Get the headers
+     * Get the headers.
      *
      * @return array the headers returned from the call
      */
@@ -366,9 +373,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set the error code number
+     * Set the error code number.
      *
-     * @param integer $code the error code number
+     * @param int $code the error code number
+     *
      * @return self
      */
     public function setErrorCode($code = 0)
@@ -379,9 +387,9 @@ abstract class USPSBase
     }
 
     /**
-     * Get the error code number
+     * Get the error code number.
      *
-     * @return integer error code number
+     * @return int error code number
      */
     public function getErrorCode()
     {
@@ -389,9 +397,10 @@ abstract class USPSBase
     }
 
     /**
-     * Set the error message
+     * Set the error message.
      *
      * @param string $message the error message
+     *
      * @return self
      */
     public function setErrorMessage($message = '')
@@ -402,7 +411,7 @@ abstract class USPSBase
     }
 
     /**
-     * Get the error code message
+     * Get the error code message.
      *
      * @return string error code message
      */
@@ -412,10 +421,11 @@ abstract class USPSBase
     }
 
     /**
-     * Find a key inside a multi dim. array
+     * Find a key inside a multi dim. array.
      *
      * @param array  $array
      * @param string $key
+     *
      * @return mixed
      */
     protected function getValueByKey($array, $key)
@@ -433,6 +443,5 @@ abstract class USPSBase
         }
 
         // Nothing matched
-        return null;
     }
 }

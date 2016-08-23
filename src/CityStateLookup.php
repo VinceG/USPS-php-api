@@ -20,7 +20,7 @@ class CityStateLookup extends USPSBase
     protected $addresses = [];
 
     /**
-     * Perform the API call
+     * Perform the API call.
      *
      * @return string
      */
@@ -30,7 +30,7 @@ class CityStateLookup extends USPSBase
     }
 
     /**
-     * returns array of all addresses added so far
+     * returns array of all addresses added so far.
      *
      * @return array
      */
@@ -40,17 +40,18 @@ class CityStateLookup extends USPSBase
     }
 
     /**
-     * Add zip zip code to the stack
+     * Add zip zip code to the stack.
      *
      * @param string $zip5 - zip code 5 integers
      * @param string $zip4 - optional 4 integers zip code
      * @param string $id   the address unique id
+     *
      * @return void
      */
     public function addZipCode($zip5, $zip4 = '', $id = null)
     {
         $packageId = $id !== null ? $id : ((count($this->addresses) + 1));
-        $zipCodes  = ['Zip5' => $zip5];
+        $zipCodes = ['Zip5' => $zip5];
         if ($zip4) {
             $zipCodes['Zip4'] = $zip4;
         }
