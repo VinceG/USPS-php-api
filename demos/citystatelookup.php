@@ -1,5 +1,7 @@
 <?php
 
+require_once('autoload.php');
+
 // Initiate and set the username provided from usps
 $verify = new \USPS\CityStateLookup('xxxx');
 

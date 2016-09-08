@@ -1,5 +1,7 @@
 <?php
 
+require_once('autoload.php');
+
 // Initiate and set the username provided from usps
 $label = new \USPS\PriorityLabel('xxxx');
 

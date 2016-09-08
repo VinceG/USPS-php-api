@@ -1,5 +1,7 @@
 <?php
 
+require_once('autoload.php');
+
 use USPS\RatePackage;
 
 // Initiate and set the username provided from usps
