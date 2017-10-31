@@ -107,6 +107,12 @@ abstract class USPSBase
      */
     public function __construct($username = '')
     {
+        if ($username == 'xxxx') { 
+            // check environment 
+            if (getenv('USPS_API_USERID')) { 
+               $username = getenv('USPS_API_USERID'); 
+            }
+        }
         $this->username = $username;
     }
 

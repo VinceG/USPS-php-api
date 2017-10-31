@@ -28,7 +28,7 @@ https://packagist.org/packages/vinceg/usps-php-api
 Examples
 =======
 
-Please check the 'demos' directory for usage examples on the various types of api calls and actions you can perform.
+Please check the 'demos' directory for usage examples on the various types of api calls and actions you can perform.  You can create the environment variable USPS_API_USERID to store your USPS API Userid, and run these scripts without modification.
 
 Authors
 =======
