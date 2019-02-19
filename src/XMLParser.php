@@ -142,7 +142,7 @@ class XMLParser
 
         // after we are done with all the keys in the array (if it is one)
         // we check if it has any text value, if yes, append it.
-        if (!is_array($arr)) {
+        if (!is_array($arr) && !is_object($arr)) {
             $node->appendChild($xml->createTextNode(htmlspecialchars(self::bool2str($arr), ENT_QUOTES, self::$encoding)));
         }
 
