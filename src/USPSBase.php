@@ -431,7 +431,7 @@ abstract class USPSBase
     protected function getValueByKey($array, $key)
     {
         foreach ($array as $k => $each) {
-            if ($k == $key) {
+            if ($k === $key) {
                 return $each;
             }
 
