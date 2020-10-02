@@ -1,10 +1,10 @@
 USPS PHP API
 ===========
 
-This wrapper allows you to perform some basic calls to the USPS api. Some of the features currently supported are:
+This wrapper allows you to perform some basic calls to the USPS API. Some of the features currently supported are:
 
 - Rate Calculator (Both domestic and international)
-- Zip code lookup by address
+- Zipcode lookup by address
 - City/State lookup by zip code
 - Verify address
 - Create Priority Shipping Labels
@@ -28,7 +28,7 @@ https://packagist.org/packages/vinceg/usps-php-api
 Examples
 =======
 
-Please check the 'demos' directory for usage examples on the various types of api calls and actions you can perform.
+Please check the 'demos' directory for usage examples on the various types of API calls and actions you can perform.
 
 Authors
 =======
