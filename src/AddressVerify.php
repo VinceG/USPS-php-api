@@ -17,6 +17,10 @@ class AddressVerify extends USPSBase
      */
     protected $apiVersion = 'Verify';
     /**
+     * @var string - revision version for including additional response fields
+     */
+    protected $revision = '';
+    /**
      * @var array - list of all addresses added so far
      */
     protected $addresses = [];
@@ -38,7 +42,8 @@ class AddressVerify extends USPSBase
      */
     public function getPostFields()
     {
-        return $this->addresses;
+        $postFields = !empty($this->revision) ? ['Revision' => $this->revision] : [];
+        return array_merge($postFields, $this->addresses);
     }
 
     /**
@@ -52,5 +57,19 @@ class AddressVerify extends USPSBase
         $packageId = $id !== null ? $id : ((count($this->addresses) + 1));
 
         $this->addresses['Address'][] = array_merge(['@attributes' => ['ID' => $packageId]], $data->getAddressInfo());
+    }
+
+    /**
+     * Set the revision value
+     *
+     * @param string|int $value
+     *
+     * @return object AddressVerify
+     */
+    public function setRevision($value)
+    {
+        $this->revision = (string)$value;
+
+        return $this;
     }
 }
