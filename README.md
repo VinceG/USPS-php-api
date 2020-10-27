@@ -20,6 +20,10 @@ Requirements
 - Configured with the cURL extension
 - USPS API Username
 
+Install
+=======
+`composer require vinceg/usps-php-api`
+
 Package
 =======
 
