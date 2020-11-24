@@ -18,7 +18,7 @@ class Address
     protected $addressInfo = [];
 
     /**
-     * Set the address2 property.
+     * Set the address1 property usually the apt or suit number.
      *
      * @param string|int $value
      *
@@ -30,7 +30,7 @@ class Address
     }
 
     /**
-     * Set the address1 property usually the apt or suit number.
+     * Set the address2 property.
      *
      * @param string|int $value
      *
