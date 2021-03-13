@@ -12,8 +12,8 @@ namespace USPS;
  */
 abstract class USPSBase
 {
-    const LIVE_API_URL = 'https://secure.shippingapis.com/ShippingAPI.dll';
-    const TEST_API_URL = 'http://production.shippingapis.com/ShippingAPITest.dll';
+    const LIVE_API_URL = 'secure.shippingapis.com/ShippingAPI.dll';
+    const TEST_API_URL = 'production.shippingapis.com/ShippingAPITest.dll';
 
     /**
      * @var string - the usps username provided by the usps website
@@ -65,6 +65,10 @@ abstract class USPSBase
      * @var bool - set whether we are in a test mode or not
      */
     public static $testMode = false;
+    /**
+     * @var string - set whether to use HTTP or HTTPS
+     */
+    public static $protocol = 'https';
     /**
      * @var array - different kind of supported api calls by this wrapper
      */
@@ -223,9 +227,30 @@ abstract class USPSBase
         return $this->getResponse();
     }
 
+    /**
+     * Return the protocol (HTTP or HTTPS) to use for the API URLs.
+     *
+     * @return string
+     */
+    public static function getProtocol()
+    {
+        return static::$protocol;
+    }
+
+    /**
+     * Set the protocol (HTTP or HTTPS) to use for the API URLs.
+     *
+     * @aaram string $protocol
+     * @return void
+     */
+    public static function setProtocol($protocol)
+    {
+        static::$protocol = $protocol;
+    }
+
     public function getEndpoint()
     {
-        return self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL;
+        return sprintf('%s://%s', static::getProtocol(), self::$testMode ? self::TEST_API_URL : self::LIVE_API_URL);
     }
 
     abstract public function getPostFields();
