@@ -18,7 +18,7 @@ class TrackConfirm extends USPSBase
 
     public function getEndpoint()
     {
-        return sprintf('%s://%s', static::getProtocol(), self::$testMode ? 'production.shippingapis.com/ShippingAPITest.dll' : 'production.shippingapis.com/ShippingAPI.dll');
+        return self::$testMode ? 'http://production.shippingapis.com/ShippingAPITest.dll' : 'http://production.shippingapis.com/ShippingAPI.dll';
     }
 
     /**
