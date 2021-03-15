@@ -13,7 +13,7 @@ namespace USPS;
 abstract class USPSBase
 {
     const LIVE_API_URL = 'https://secure.shippingapis.com/ShippingAPI.dll';
-    const TEST_API_URL = 'http://production.shippingapis.com/ShippingAPITest.dll';
+    const TEST_API_URL = 'https://production.shippingapis.com/ShippingAPITest.dll';
 
     /**
      * @var string - the usps username provided by the usps website
