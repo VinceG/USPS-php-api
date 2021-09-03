@@ -12,6 +12,18 @@ class TrackConfirm extends USPSBase
      */
     protected $apiVersion = 'TrackV2';
     /**
+     * @var string - revision version for including additional response fields
+     */
+    protected $revision = '';
+    /**
+     * @var string - User IP address. Required when TrackFieldRequest[Revision=’1’].
+     */
+    protected $clientIp = '';
+    /**
+     * @var string - Internal User Identification. Required when TrackFieldRequest[Revision=’1’].
+     */
+    protected $sourceId = '';
+    /**
      * @var array - list of all packages added so far
      */
     protected $packages = [];
@@ -38,7 +50,12 @@ class TrackConfirm extends USPSBase
      */
     public function getPostFields()
     {
-        return $this->packages;
+        $postFields = array();
+        if ( !empty($this->revision) ) { $postFields['Revision'] = $this->revision; }
+        if ( !empty($this->revision) ) { $postFields['ClientIp'] = $this->clientIp; }
+        if ( !empty($this->revision) ) { $postFields['SourceId'] = $this->sourceId; }
+
+        return array_merge($postFields, $this->packages);
     }
 
     /**
@@ -51,5 +68,47 @@ class TrackConfirm extends USPSBase
     public function addPackage($id)
     {
         $this->packages['TrackID'][] = ['@attributes' => ['ID' => $id]];
+    }
+
+    /**
+     * Set the revision value
+     *
+     * @param string|int $value
+     *
+     * @return object AddressVerify
+     */
+    public function setRevision($value)
+    {
+        $this->revision = (string)$value;
+
+        return $this;
+    }
+
+    /**
+     * Set the ClientIp value
+     *
+     * @param string $value
+     *
+     * @return object AddressVerify
+     */
+    public function setClientIp($value)
+    {
+        $this->clientIp = (string)$value;
+
+        return $this;
+    }
+
+    /**
+     * Set the SourceId value
+     *
+     * @param string $value
+     *
+     * @return object AddressVerify
+     */
+    public function setSourceId($value)
+    {
+        $this->sourceId = (string)$value;
+
+        return $this;
     }
 }
